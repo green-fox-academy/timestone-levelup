@@ -7,12 +7,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PitchesRestController {
+  private HttpHeaders responseHeader = new HttpHeaders();
+
+  private void setHttpHeader(String name, String value) {
+    responseHeader
+        .set(name, value);
+  }
+
 
   @GetMapping("api/pitches")
   public ResponseEntity<String> getPitchesApi() {
-    HttpHeaders responseHeader = new HttpHeaders();
-    responseHeader
-        .set(IPItchesRestController.HEADER_NAME, IPItchesRestController.AUTHORIZATION_STATUS_OK);
+    setHttpHeader(IPItchesRestController.HEADER_NAME, IPItchesRestController.AUTHORIZATION_STATUS_OK);
 
     if (responseHeader.getValuesAsList(IPItchesRestController.HEADER_NAME).get(0)
         .equals(IPItchesRestController.AUTHORIZATION_STATUS_OK)) {
