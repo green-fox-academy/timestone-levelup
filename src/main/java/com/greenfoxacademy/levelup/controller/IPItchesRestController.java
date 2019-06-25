@@ -3,8 +3,6 @@ package com.greenfoxacademy.levelup.controller;
 public interface IPItchesRestController {
 
   static final String HEADER_NAME = "Authorization";
-  static final String AUTHORIZATION_STATUS_OK = "ok";
-  static final String AUTHORIZATION_STATUS_ERROR = "error";
   static final String ERROR_BODY = "{\n"
       + "  \"error\": \"Unauthorizied\"\n"
       + "}".replaceAll("\\s", "");
