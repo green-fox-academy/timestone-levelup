@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 public class PitchesRestControllerTest {
 
-  // @Mock
+  @Mock
   PitchesRestController pitchesRestController;
 
   @Autowired
@@ -36,14 +36,18 @@ public class PitchesRestControllerTest {
   }
 
   @Test
-  public void whenAuthorizationIsOk_thenReturnPitchesApiBody() throws Exception{
-
+  public void whenAuthorizationIsOk_thenReturnsPitchesApiBody() throws Exception{
     mockMvc.perform(get("/api/pitches")
       .contentType(MediaType.APPLICATION_JSON))
       .andExpect(content().string(IPItchesRestController.BODY));
   }
 
-
+  @Test
+  public void whenAuthorizationIsOk_thenReturnsStatusCode200() throws Exception {
+    mockMvc.perform(get("/api/pitches")
+        .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk());
+  }
 
   @Test
   public void whenResponseStatusIsUnauthorized_thenReturnErrorBody() throws Exception {
@@ -55,4 +59,12 @@ public class PitchesRestControllerTest {
       .andExpect(content().string(IPItchesRestController.ERROR_BODY));
   }
 
+  @Test
+  public void whenResponseStatusIsUnauthorized_thenReturnsStatusCode401() throws Exception {
+    pitchesRestController.setAuthorized(false);
+
+    mockMvc.perform(get("/api/pitches")
+        .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().is4xxClientError());
+  }
 }
