@@ -19,7 +19,7 @@ public class PitchesRestController {
   public ResponseEntity<String> getPitchesApi() {
     responseHeader.set(IPItchesRestController.HEADER_NAME, "");
 
-    if (isAuthorized == true) {
+    if (isAuthorized) {
       return new ResponseEntity<String>(IPItchesRestController.BODY, responseHeader,
           HttpStatus.OK);
     }
