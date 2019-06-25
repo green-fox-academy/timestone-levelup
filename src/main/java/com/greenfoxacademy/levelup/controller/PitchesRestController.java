@@ -16,7 +16,7 @@ public class PitchesRestController {
   }
 
   @GetMapping("api/pitches")
-  public ResponseEntity<String> getPitchesApiError() {
+  public ResponseEntity<String> getPitchesApi() {
     responseHeader.set(IPItchesRestController.HEADER_NAME, "");
 
     if (isAuthorized == true) {
