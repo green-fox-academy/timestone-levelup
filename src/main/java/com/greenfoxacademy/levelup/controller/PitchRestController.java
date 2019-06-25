@@ -1,9 +1,11 @@
 package com.greenfoxacademy.levelup.controller;
 
+import com.greenfoxacademy.levelup.model.Pitch;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,7 +23,7 @@ public class PitchRestController {
   }
 
   @PostMapping("/api/pitch")
-  public ResponseEntity<String> postPitchApi() {
+  public ResponseEntity<String> postPitchApi(@RequestBody Pitch pitch) {
     httpHeaders.set("Authorization", "");
 
     if (isAuthorized) {
