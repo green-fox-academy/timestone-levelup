@@ -7,7 +7,7 @@ public interface IPitchRestController {
   static final String AUTH_UNAUTHORIZED = "Unauthorized";
 
   static final String PITCH_SUCCESSFUL_BODY = "{\n"
-      + "  \"message\": \"Created\"\n"
+      + "  \"message\": \"Success\"\n"
       + "}".replaceAll("\\s", "");
 
   static final String PITCH_UNAUTHORIZED_BODY = "{\n"
