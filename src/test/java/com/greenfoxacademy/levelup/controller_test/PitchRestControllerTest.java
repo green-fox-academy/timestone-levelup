@@ -39,4 +39,15 @@ public class PitchRestControllerTest {
         .content(IPitchRestController.PITCH_REQUIRED_BODY))
         .andExpect(status().isOk());
   }
+
+  @Test
+  public void whenAuthorizationIsUnsuccessful_thenReturnsStatusCode401() throws Exception {
+    pitchRestController
+        .setHeader(IPitchRestController.AUTHORIZATION, IPitchRestController.AUTH_UNAUTHORIZED);
+
+    mockMvc.perform(put("/api/pitch")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(IPitchRestController.PITCH_REQUIRED_BODY))
+        .andExpect(status().is4xxClientError());
+  }
 }
