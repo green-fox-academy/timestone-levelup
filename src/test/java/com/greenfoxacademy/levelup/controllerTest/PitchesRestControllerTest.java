@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 public class PitchesRestControllerTest {
 
-  @Autowired
+  // @Mock
   PitchesRestController pitchesRestController;
 
   @Autowired
@@ -37,12 +37,22 @@ public class PitchesRestControllerTest {
 
   @Test
   public void whenAuthorizationIsOk_thenReturnPitchesApiBody() throws Exception{
-    pitchesRestController.setAuthorized(true);
+
+    mockMvc.perform(get("/api/pitches")
+      .contentType(MediaType.APPLICATION_JSON))
+      .andExpect(content().string(IPItchesRestController.BODY));
+  }
+
+
+
+  @Test
+  public void whenResponseStatusIsUnauthorized_thenReturnErrorBody() throws Exception {
+    pitchesRestController.setAuthorized(false);
 
     mockMvc.perform(get("/api/pitches")
       .contentType(MediaType.APPLICATION_JSON))
       .andDo(print())
-      .andExpect(status().isOk())
-      .andExpect(content().string(IPItchesRestController.BODY));
+      .andExpect(content().string(IPItchesRestController.ERROR_BODY));
   }
+
 }
