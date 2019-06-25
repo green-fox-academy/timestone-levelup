@@ -1,33 +1,32 @@
 package com.greenfoxacademy.levelup.controller;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PitchesRestController {
   private HttpHeaders responseHeader = new HttpHeaders();
+  boolean isAuthorized;
 
-  private void setHttpHeader(String name, String value) {
-    responseHeader
-        .set(name, value);
+  public void setAuthorized(boolean authorized) {
+    isAuthorized = authorized;
   }
 
-
   @GetMapping("api/pitches")
-  public ResponseEntity<String> getPitchesApi() {
-    setHttpHeader(IPItchesRestController.HEADER_NAME, IPItchesRestController.AUTHORIZATION_STATUS_OK);
+  public ResponseEntity<String> getPitchesApiError() {
+    responseHeader.set(IPItchesRestController.HEADER_NAME, "");
 
-    if (responseHeader.getValuesAsList(IPItchesRestController.HEADER_NAME).get(0)
-        .equals(IPItchesRestController.AUTHORIZATION_STATUS_OK)) {
-      return ResponseEntity.ok()
-          .headers(responseHeader)
-          .body(IPItchesRestController.BODY);
+    setAuthorized(true);
+
+    if (isAuthorized == true) {
+      return new ResponseEntity<String>(IPItchesRestController.BODY, responseHeader,
+          HttpStatus.ACCEPTED);
     }
-
-    return ResponseEntity.status(401)
-        .headers(responseHeader)
-        .body(IPItchesRestController.ERROR_BODY);
+    return new ResponseEntity<String>(IPItchesRestController.ERROR_BODY, responseHeader,
+        HttpStatus.UNAUTHORIZED);
   }
 }
