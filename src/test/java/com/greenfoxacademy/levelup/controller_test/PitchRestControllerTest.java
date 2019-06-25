@@ -34,11 +34,29 @@ public class PitchRestControllerTest {
   @Test
   public void whenAuthorizationIsOk_thenReturnsStatusCode201() throws Exception {
     mockMvc.perform(post("/api/pitch")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(IPitchRestInterface.PITCH_REQUIRED_BODY))
-        .andExpect(status().isCreated())
-        .andDo(print());
+      .contentType(MediaType.APPLICATION_JSON)
+      .content(IPitchRestInterface.PITCH_REQUIRED_BODY))
+      .andExpect(status().isCreated());
   }
 
-  
+  @Test
+  public void whenStatusIsUnauthorized_thenReturnsStatusCode401() throws Exception {
+    pitchRestController.setAuthorization(false);
+
+    mockMvc.perform(post("/api/pitch")
+      .contentType(MediaType.APPLICATION_JSON)
+      .content(IPitchRestInterface.PITCH_REQUIRED_BODY))
+      .andExpect(status().is4xxClientError());
+  }
+
+  @Test
+  public void whenMissingField_thenReturnsStatusCode404() throws Exception {
+    pitchRestController.setAuthorization(false);
+    pitchRestController.setMissingFields(true);
+
+    mockMvc.perform(post("/api/pitch")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(IPitchRestInterface.PITCH_REQUIRED_BODY))
+        .andExpect(status().isNotFound());
+  }
 }

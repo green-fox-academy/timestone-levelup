@@ -14,11 +14,11 @@ public class PitchRestController {
   private static boolean isAuthorized = true;
   private static boolean isMissingField = false;
 
-  public static void setIsAuthorized(boolean authorized) {
+  public static void setAuthorization(boolean authorized) {
     isAuthorized = authorized;
   }
 
-  public static void setIsMissingField(boolean missingField) {
+  public static void setMissingFields(boolean missingField) {
     isMissingField = missingField;
   }
 
