@@ -2,26 +2,26 @@ package com.greenfoxacademy.levelup.model;
 
 public class MockObject {
 
-  private double version;
+  private Double version;
   private String name;
   private String tag;
-  private int[] level;
+  private int[] levels;
 
-  public MockObject(double version, String name, String tag, int[] level) {
+  public MockObject(Double version, String name, String tag, int[] levels) {
     this.version = version;
     this.name = name;
     this.tag = tag;
-    this.level = level;
+    this.levels = levels;
   }
 
   public MockObject(){
   }
 
-  public double getVersion() {
+  public Double getVersion() {
     return version;
   }
 
-  public void setVersion(double version) {
+  public void setVersion(Double version) {
     this.version = version;
   }
 
@@ -41,12 +41,12 @@ public class MockObject {
     this.tag = tag;
   }
 
-  public int[] getLevel() {
-    return level;
+  public int[] getLevels() {
+    return levels;
   }
 
-  public void setLevel(int[] level) {
-    this.level = level;
+  public void setLevels(int[] levels) {
+    this.levels = levels;
   }
 }
 
