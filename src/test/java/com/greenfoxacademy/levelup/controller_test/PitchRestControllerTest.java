@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.greenfoxacademy.levelup.controller.IPitchRestController;
 import com.greenfoxacademy.levelup.controller.PitchRestController;
+import com.greenfoxacademy.levelup.model.Mandatory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 @RunWith(SpringRunner.class)
 @WebMvcTest
 public class PitchRestControllerTest {
+  private Mandatory mandatory = new Mandatory();
+
   @Mock
   PitchRestController pitchRestController;
 
@@ -28,11 +31,16 @@ public class PitchRestControllerTest {
   @Before
   public void setup() {
     MockitoAnnotations.initMocks(this);
+    mandatory.setBadgeName("badge");
+    mandatory.setNewMessage("message");
+    mandatory.setPitcherName("pitcher name");
+    mandatory.setNewStatus("status");
   }
 
   @Test
-  public void whenAuthorizationIsOk_thenReturnsStatusCode201() throws Exception {
-    pitchRestController.setHeader(IPitchRestController.AUTHORIZATION, IPitchRestController.AUTH_OK);
+  public void whenAuthorizationIsOkAndHasNoMissingField_thenReturnsStatusCode201() throws Exception {
+    pitchRestController
+        .setHeader(IPitchRestController.AUTHORIZATION, IPitchRestController.AUTHORIZATION_VALUES[0]);
 
     mockMvc.perform(put("/api/pitch")
         .contentType(MediaType.APPLICATION_JSON)
@@ -41,9 +49,21 @@ public class PitchRestControllerTest {
   }
 
   @Test
+  public void whenAuthorizationIsOkAndHasMissingField_thenReturnsStatusCode404() throws Exception {
+    pitchRestController
+        .setHeader(IPitchRestController.AUTHORIZATION, IPitchRestController.AUTHORIZATION_VALUES[0]);
+    mandatory.setNewStatus(null);
+
+    mockMvc.perform(put("/api/pitch")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(IPitchRestController.PITCH_REQUIRED_BODY))
+        .andExpect(status().isNotFound());
+  }
+
+  @Test
   public void whenAuthorizationIsUnsuccessful_thenReturnsStatusCode401() throws Exception {
     pitchRestController
-        .setHeader(IPitchRestController.AUTHORIZATION, IPitchRestController.AUTH_UNAUTHORIZED);
+        .setHeader(IPitchRestController.AUTHORIZATION, IPitchRestController.AUTHORIZATION_VALUES[1]);
 
     mockMvc.perform(put("/api/pitch")
         .contentType(MediaType.APPLICATION_JSON)
