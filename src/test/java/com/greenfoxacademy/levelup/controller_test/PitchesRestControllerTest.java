@@ -15,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -24,47 +25,39 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 public class PitchesRestControllerTest {
 
-  @Mock
-  PitchesRestController pitchesRestController;
-
   @Autowired
   MockMvc mockMvc;
-
-  @Before
-  public void setup() {
-    MockitoAnnotations.initMocks(this);
-  }
 
   @Test
   public void whenAuthorizationIsOk_thenReturnsPitchesApiBody() throws Exception{
     mockMvc.perform(get("/api/pitches")
-      .contentType(MediaType.APPLICATION_JSON))
-      .andExpect(content().string(IPItchesRestController.BODY));
+    .contentType(MediaType.APPLICATION_JSON)
+    .header("Authorization", "Full"))
+    .andExpect(content().string(IPItchesRestController.BODY));
   }
 
   @Test
   public void whenAuthorizationIsOk_thenReturnsStatusCode200() throws Exception {
     mockMvc.perform(get("/api/pitches")
-        .contentType(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk());
+      .contentType(MediaType.APPLICATION_JSON)
+      .header("Authorization", "Full"))
+      .andExpect(status().isOk());
   }
 
   @Test
   public void whenResponseStatusIsUnauthorized_thenReturnErrorBody() throws Exception {
-    pitchesRestController.setAuthorized(false);
-
     mockMvc.perform(get("/api/pitches")
-      .contentType(MediaType.APPLICATION_JSON))
+      .contentType(MediaType.APPLICATION_JSON)
+      .header("Authorization", "Denied"))
       .andDo(print())
       .andExpect(content().string(IPItchesRestController.ERROR_BODY));
   }
 
   @Test
   public void whenResponseStatusIsUnauthorized_thenReturnsStatusCode401() throws Exception {
-    pitchesRestController.setAuthorized(false);
-
     mockMvc.perform(get("/api/pitches")
-        .contentType(MediaType.APPLICATION_JSON))
-        .andExpect(status().is4xxClientError());
+      .contentType(MediaType.APPLICATION_JSON)
+      .header("Authorization", "Denied"))
+      .andExpect(status().is4xxClientError());
   }
 }
