@@ -1,12 +1,12 @@
 package com.greenfoxacademy.levelup.model;
 
-public class Error {
+public class ErrorMessage {
   String error;
 
-  public Error(){
+  public ErrorMessage(){
   }
 
-  public Error(String error) {
+  public ErrorMessage(String error) {
     this.error = error;
   }
 
