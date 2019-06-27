@@ -20,11 +20,7 @@ public class BadgesRestControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
-
-  @Before
-  public void initMocks() {
-  }
-
+  
   @Test
   public void isAuthorized() throws Exception {
 
