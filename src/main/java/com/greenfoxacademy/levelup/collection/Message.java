@@ -15,6 +15,12 @@ public class Message {
   static final String AUTHORIZED_BODY = "{\n"
       + "  \"message\": \"OK\"\n"
       + "}".replaceAll("\\s", "");
+  static final String ADDADMIN_BODY = "{\n" +
+      "  \"version\": \"2.3\",\n" +
+      "  \"name\": \"Badge inserter\",\n" +
+      "  \"tag\": \"general\",\n" +
+      "  \"levels\": \"[]\"\n" +
+      "}";
 
   public static String getHeaderName() {
     return HEADER_NAME;
@@ -34,6 +40,10 @@ public class Message {
 
   public static String getAuthorizedBody() {
     return AUTHORIZED_BODY;
+  }
+
+  public static String getAddadminBody() {
+    return ADDADMIN_BODY;
   }
 }
 
