@@ -1,5 +1,6 @@
 package com.greenfoxacademy.levelup.model;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 public class Pitch {
@@ -58,5 +59,14 @@ public class Pitch {
 
   public void setHolders(List<String> holders) {
     this.holders = holders;
+  }
+
+  public boolean hasNullField() throws IllegalAccessException {
+    for (Field field : this.getClass().getDeclaredFields()) {
+      if (field.get(this) == null) {
+        return true;
+      }
+    }
+    return false;
   }
 }

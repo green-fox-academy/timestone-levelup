@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class PitchRestController {
 
   @PostMapping("/api/pitch")
-  public ResponseEntity<String> postPitchApi(@RequestHeader(value = "Authorization", required = false) String authorization, @RequestBody(required = false) Pitch pitch) {
+  public ResponseEntity<String> postPitchApi(@RequestHeader(value = "Authorization", required = false) String authorization, @RequestBody(required = false) Pitch pitch) throws IllegalAccessException {
 
     if (authorization == null || authorization.equals("")) {
       return new ResponseEntity<>(IPitchRestInterface.PITCH_UNAUTHORIZED_BODY,
               HttpStatus.UNAUTHORIZED);
-    } else if (pitch.getBadgeName() == null || pitch.getHolders() == null || pitch.getOldLVL() == 0 ||
-            pitch.getPitchedLVL() == 0 || pitch.getPitchMessage() == null) {
+    } else if (pitch.hasNullField() == true) {
       return new ResponseEntity<>(IPitchRestInterface.PITCH_UNSUCCESFUL_BODY,
               HttpStatus.NOT_FOUND);
     }
