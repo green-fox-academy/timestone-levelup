@@ -14,7 +14,6 @@ public class PitchRestController {
   @PutMapping("/api/pitch")
   public ResponseEntity<String> putPitchApi(@RequestHeader(value="Authorization") String authorization,
       @RequestBody Mandatory mandatory) throws  Exception {
-
     return Util.isAuthorized(authorization, mandatory);
     }
 }
