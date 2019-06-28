@@ -15,7 +15,7 @@ public class Message {
       + "  \"error\": \"Unauthorizied\"\n"
       + "}".replaceAll("\\s", "");
 
-  public static final String PITCH_UNSUCCESFUL_BODY = "{\n"
+  public static final String PITCH_UNSUCCESSFUL_BODY = "{\n"
       + "  \"error\": \"Please provide all fields\"\n"
       + "}".replaceAll("\\s", "");
 
