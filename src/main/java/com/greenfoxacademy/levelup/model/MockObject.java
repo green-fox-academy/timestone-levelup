@@ -49,5 +49,3 @@ public class MockObject {
     this.levels = levels;
   }
 }
-
-
