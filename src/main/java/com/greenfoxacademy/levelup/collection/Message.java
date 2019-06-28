@@ -24,5 +24,5 @@ public class Message {
       + "    \t\"badgeName\": \"english speaker\",\n"
       + "    \t\"newStatus\": \"\",\n"
       + "    \t\"newMessage\": \"\"\n"
-      + "    }";
+      + "    }".replaceAll("\\s", "");
 }
