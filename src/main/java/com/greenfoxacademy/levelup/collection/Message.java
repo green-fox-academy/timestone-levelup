@@ -19,8 +19,8 @@ public class Message {
       "  \"version\": \"2.3\",\n" +
       "  \"name\": \"Badge inserter\",\n" +
       "  \"tag\": \"general\",\n" +
-      "  \"levels\": \"[]\"\n" +
-      "}";
+      "  \"levels\": [1, 2, 3, 4]\n" +
+      "}".replaceAll("\\s", "");
 
   public static String getHeaderName() {
     return HEADER_NAME;
