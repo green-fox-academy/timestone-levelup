@@ -4,20 +4,19 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.greenfoxacademy.levelup.controller.IPitchRestController;
-import com.greenfoxacademy.levelup.controller.PitchRestController;
-import com.greenfoxacademy.levelup.model.Mandatory;
-import org.junit.Before;
+import com.greenfoxacademy.levelup.collection.Message;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.StatusResultMatchers;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
@@ -28,19 +27,18 @@ public class PitchRestControllerTest {
   @Autowired
   MockMvc mockMvc;
 
+  private ResultActions doMockMvcPerform(String content, String authorization) throws Exception {
+    return mockMvc.perform(put("/api/pitch")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(content)
+        .header(Message.AUTHORIZATION, authorization));
+  }
+
   @Test
   public void whenAuthorizationIsOkAndHasNoMissingField_thenReturnsStatusCode201() throws Exception {
-    requestBody = "{\n"
-      + "\t\"pitcherName\": \"\",\n"
-      + "\t\"badgeName\": \"english speaker\",\n"
-      + "\t\"newStatus\": \"\",\n"
-      + "\t\"newMessage\": \"\"\n"
-      + "}\n".replaceAll("\\s", "");
+    requestBody = Message.PITCH_REQUIRED_BODY;
 
-    mockMvc.perform(put("/api/pitch")
-      .contentType(MediaType.APPLICATION_JSON)
-      .content(requestBody)
-      .header("Authorization", "Full"))
+    doMockMvcPerform(requestBody, Message.AUTHORIZATION_OK)
       .andExpect(status().isOk());
   }
 
@@ -52,19 +50,15 @@ public class PitchRestControllerTest {
       + "\t\"newMessage\": \"\"\n"
       + "}\n".replaceAll("\\s", "");
 
-    mockMvc.perform(put("/api/pitch")
-      .contentType(MediaType.APPLICATION_JSON)
-      .content(IPitchRestController.PITCH_REQUIRED_BODY)
-      .header("Authorization", "Full"))
+    doMockMvcPerform(requestBody, Message.AUTHORIZATION_OK)
       .andExpect(status().isNotFound());
   }
 
   @Test
   public void whenAuthorizationIsUnsuccessful_thenReturnsStatusCode401() throws Exception {
-    mockMvc.perform(put("/api/pitch")
-      .contentType(MediaType.APPLICATION_JSON)
-      .content(IPitchRestController.PITCH_REQUIRED_BODY)
-      .header("Authorization", "Deny"))
+    requestBody = Message.PITCH_REQUIRED_BODY;
+
+    doMockMvcPerform(requestBody, Message.AUTHORIZATION_DENIED)
       .andExpect(status().is4xxClientError());
   }
 }
