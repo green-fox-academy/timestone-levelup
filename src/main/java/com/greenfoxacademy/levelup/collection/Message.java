@@ -1,11 +1,13 @@
 package com.greenfoxacademy.levelup.collection;
 
 public class Message {
-  static final String AUTHORIZATION = "Authorization";
-  static final String ERROR_BODY = "{\n"
+  public static final String AUTHORIZATION = "Authorization";
+  public static final String AUTHORIZATION_OK = "Ok";
+  public static final String AUTHORIZATION_DENIED = "Denied";
+  public static final String ERROR_BODY = "{\n"
       + "  \"error\": \"Unauthorizied\"\n"
       + "}".replaceAll("\\s", "");
-  static final String BODY = "{\n"
+  public static final String BODY = "{\n"
       + "  \"myPitches\": [\n"
       + "    {\n"
       + "      \"timestamp\": \"2018-11-29 17:10:47\",\n"
