@@ -18,5 +18,3 @@ public class AddRestController {
     return Util.getAdminObjectAndAuthorization(objectDTO, authorization);
   }
 }
-
-
