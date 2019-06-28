@@ -32,7 +32,7 @@ public class PitchRestControllerTest {
     mockMvc.perform(post("/api/pitch")
             .header("Authorization", "author")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(IPitchRestInterface.PITCH_REQUIRED_BODY))
+            .content(IPitchRestInterface.pitchRequiredBody))
             .andExpect(status().isCreated());
   }
 
@@ -41,7 +41,7 @@ public class PitchRestControllerTest {
 
     mockMvc.perform(post("/api/pitch")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(IPitchRestInterface.PITCH_REQUIRED_BODY))
+            .content(IPitchRestInterface.pitchRequiredBody))
             .andExpect(status().is4xxClientError());
   }
 

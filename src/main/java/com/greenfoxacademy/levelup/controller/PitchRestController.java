@@ -15,13 +15,13 @@ public class PitchRestController {
   public ResponseEntity<String> postPitchApi(@RequestHeader(value = "Authorization", required = false) String authorization, @RequestBody(required = false) Pitch pitch) throws IllegalAccessException {
 
     if (authorization == null || authorization.equals("")) {
-      return new ResponseEntity<>(IPitchRestInterface.PITCH_UNAUTHORIZED_BODY,
+      return new ResponseEntity<>(IPitchRestInterface.pitchUnauthorizedBody,
               HttpStatus.UNAUTHORIZED);
     } else if (pitch.hasNullField() == true) {
-      return new ResponseEntity<>(IPitchRestInterface.PITCH_UNSUCCESFUL_BODY,
+      return new ResponseEntity<>(IPitchRestInterface.pitchUnsuccesfulBody,
               HttpStatus.NOT_FOUND);
     }
-    return new ResponseEntity<>(IPitchRestInterface.PITCH_SUCCESSFUL_BODY,
+    return new ResponseEntity<>(IPitchRestInterface.pitchSuccessfulBody,
             HttpStatus.CREATED);
   }
 }

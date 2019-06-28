@@ -1,7 +1,7 @@
 package com.greenfoxacademy.levelup.controller;
 
 public class IPitchRestInterface {
-  public static String PITCH_REQUIRED_BODY = "{\n"
+  public static String pitchRequiredBody = "{\n"
           + "  \"badgeName\": \"English speaker\",\n"
           + "  \"oldLVL\": 2,\n"
           + "  \"pitchedLVL\": 3,\n"
@@ -9,15 +9,15 @@ public class IPitchRestInterface {
           + "  \"holders\": [\"balazs.jozsef\", \"benedek.vamosi\", \"balazs.barna\"]\n"
           + "}".replaceAll("\\s", "");
 
-  public static String PITCH_SUCCESSFUL_BODY = "{\n"
+  public static String pitchSuccessfulBody = "{\n"
           + "  \"message\": \"Created\"\n"
           + "}".replaceAll("\\s", "");
 
-  public static String PITCH_UNAUTHORIZED_BODY = "{\n"
+  public static String pitchUnauthorizedBody = "{\n"
           + "  \"error\": \"Unauthorizied\"\n"
           + "}".replaceAll("\\s", "");
 
-  public static String PITCH_UNSUCCESFUL_BODY = "{\n"
+  public static String pitchUnsuccesfulBody = "{\n"
           + "  \"error\": \"Please provide all fields\"\n"
           + "}".replaceAll("\\s", "");
 }
