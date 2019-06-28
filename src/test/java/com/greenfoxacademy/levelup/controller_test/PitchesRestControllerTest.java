@@ -5,20 +5,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.greenfoxacademy.levelup.controller.IPItchesRestController;
-import com.greenfoxacademy.levelup.controller.PitchesRestController;
-import org.junit.Before;
+import com.greenfoxacademy.levelup.collection.Message;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
@@ -28,36 +24,32 @@ public class PitchesRestControllerTest {
   @Autowired
   MockMvc mockMvc;
 
-  @Test
-  public void whenAuthorizationIsOk_thenReturnsPitchesApiBody() throws Exception{
-    mockMvc.perform(get("/api/pitches")
-    .contentType(MediaType.APPLICATION_JSON)
-    .header("Authorization", "Full"))
-    .andExpect(content().string(IPItchesRestController.BODY));
+  private ResultActions doMockMvcPerform(String authorization) throws Exception {
+    return mockMvc.perform(get("/api/pitches")
+        .header(Message.AUTHORIZATION, authorization));
   }
 
   @Test
-  public void whenAuthorizationIsOk_thenReturnsStatusCode200() throws Exception {
-    mockMvc.perform(get("/api/pitches")
-      .contentType(MediaType.APPLICATION_JSON)
-      .header("Authorization", "Full"))
+  public void whenAuthorizationIsOk_thenReturnsByPitchesApiBody() throws Exception{
+    doMockMvcPerform(Message.AUTHORIZATION_OK)
+      .andExpect(content().string(Message.BODY));
+  }
+
+  @Test
+  public void whenAuthorizationIsOk_thenReturnsByStatusCode200() throws Exception {
+    doMockMvcPerform(Message.AUTHORIZATION_OK)
       .andExpect(status().isOk());
   }
 
   @Test
-  public void whenResponseStatusIsUnauthorized_thenReturnErrorBody() throws Exception {
-    mockMvc.perform(get("/api/pitches")
-      .contentType(MediaType.APPLICATION_JSON)
-      .header("Authorization", "Denied"))
-      .andDo(print())
-      .andExpect(content().string(IPItchesRestController.ERROR_BODY));
+  public void whenResponseStatusIsUnauthorized_thenReturnsByErrorBody() throws Exception {
+    doMockMvcPerform(Message.AUTHORIZATION_DENIED)
+      .andExpect(content().string(Message.ERROR_BODY));
   }
 
   @Test
-  public void whenResponseStatusIsUnauthorized_thenReturnsStatusCode401() throws Exception {
-    mockMvc.perform(get("/api/pitches")
-      .contentType(MediaType.APPLICATION_JSON)
-      .header("Authorization", "Denied"))
-      .andExpect(status().is4xxClientError());
+  public void whenResponseStatusIsUnauthorized_thenReturnsByStatusCode401() throws Exception {
+    doMockMvcPerform(Message.AUTHORIZATION_DENIED)
+      .andExpect(status().isUnauthorized());
   }
 }
