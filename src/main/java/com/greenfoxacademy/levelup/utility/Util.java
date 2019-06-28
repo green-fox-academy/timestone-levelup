@@ -8,10 +8,10 @@ import org.springframework.http.ResponseEntity;
 public class Util {
   public static ResponseEntity<String> isAuthorized(String authorization, Mandatory mandatory) throws Exception {
 
-    if (authorization.equals("Full") && mandatory.hasNullField()) {
-      return new ResponseEntity<>(Message.PITCH_UNSUCCESFUL_BODY,
+    if (authorization.equals(Message.AUTHORIZATION_OK) && mandatory.hasNullField()) {
+      return new ResponseEntity<>(Message.PITCH_UNSUCCESSFUL_BODY,
           HttpStatus.NOT_FOUND);
-    }else if (authorization.equals("Full")) {
+    }else if (authorization.equals(Message.AUTHORIZATION_OK)) {
       return new ResponseEntity<>(Message.PITCH_SUCCESSFUL_BODY,
           HttpStatus.OK);
     }
