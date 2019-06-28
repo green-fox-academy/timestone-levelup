@@ -46,6 +46,3 @@ public class Message {
     return ADDADMIN_BODY;
   }
 }
-
-
-
