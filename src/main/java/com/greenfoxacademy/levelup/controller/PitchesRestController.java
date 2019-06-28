@@ -1,6 +1,6 @@
 package com.greenfoxacademy.levelup.controller;
 
-import org.springframework.http.HttpStatus;
+import com.greenfoxacademy.levelup.utility.Util;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -10,13 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PitchesRestController {
 
   @GetMapping("api/pitches")
-  public ResponseEntity<String> getPitchesApi(@RequestHeader("Authorization") String authorization) {
-
-    if (authorization.equals("Full")) {
-      return new ResponseEntity<String>(IPItchesRestController.BODY,
-          HttpStatus.OK);
-    }
-    return new ResponseEntity<String>(IPItchesRestController.ERROR_BODY,
-        HttpStatus.UNAUTHORIZED);
+  public ResponseEntity<String> getPitchesApi(@RequestHeader("Authorization") String authorization){
+    return Util.isAuthorized(authorization);
   }
 }
