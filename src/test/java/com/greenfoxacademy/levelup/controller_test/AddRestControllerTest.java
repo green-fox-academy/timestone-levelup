@@ -40,7 +40,6 @@ public class AddRestControllerTest {
         .andExpect(status().isCreated());
   }
 
-
   @Test
   public void whenAuthorizationIsMissingAndHasNoMissingField_thenReturnsStatusCode401() throws Exception{
     String requestContent = "{\n" +
@@ -74,6 +73,5 @@ public class AddRestControllerTest {
         .header("Authorization", "filled"))
         .andDo(print())
         .andExpect(status().isNotFound());
-
   }
 }

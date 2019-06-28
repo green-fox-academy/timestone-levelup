@@ -16,5 +16,3 @@ public class Util {
     return new ResponseEntity<>(Message.getSuccessfulBody(), HttpStatus.CREATED);
   }
 }
-
-
