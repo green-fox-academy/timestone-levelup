@@ -75,7 +75,7 @@ public class PitchRestControllerTest {
     requestBody = Message.PITCH_REQUIRED_BODY;
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_DENIED)
-      .andExpect(status().is4xxClientError());
+      .andExpect(status().isUnauthorized());
   }
 
   @Test
