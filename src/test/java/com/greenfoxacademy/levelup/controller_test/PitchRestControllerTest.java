@@ -38,7 +38,7 @@ public class PitchRestControllerTest {
     requestBody = Message.PITCH_REQUIRED_BODY;
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_OK)
-        .andExpect(content().string(Message.PITCH_SUCCESSFUL_BODY));
+        .andExpect(content().string(Message.SUCCESSFUL_BODY));
   }
 
   @Test
@@ -56,7 +56,7 @@ public class PitchRestControllerTest {
     requestBody = "{\"badgeName\":\"englishspeaker\",\"newStatus\":\"\",\"newMessage\":\"\"}";
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_OK)
-        .andExpect(content().string(Message.PITCH_UNSUCCESSFUL_BODY));
+        .andExpect(content().string(Message.UNSUCCESSFUL_BODY));
   }
 
   @Test
@@ -72,13 +72,13 @@ public class PitchRestControllerTest {
     requestBody = Message.PITCH_REQUIRED_BODY;
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_DENIED)
-        .andExpect(content().string(Message.PITCH_UNAUTHORIZED_BODY));
+        .andExpect(content().string(Message.UNAUTHORIZED_BODY));
   }
 
   private ResultActions doMockMvcPerform(String content, String authorization) throws Exception {
     return mockMvc.perform(put("/api/pitch")
         .contentType(MediaType.APPLICATION_JSON)
         .content(content)
-        .header(Message.AUTHORIZATION, authorization));
+        .header(Message.HEADER_NAME, authorization));
   }
 }
