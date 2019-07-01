@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.ResultActions;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
-@AutoConfigureMockMvc
 public class PitchesRestControllerTest {
 
   @Autowired
@@ -36,18 +35,18 @@ public class PitchesRestControllerTest {
 
   @Test
   public void whenResponseStatusIsUnauthorized_thenReturnsByErrorBody() throws Exception {
-    doMockMvcPerform(Message.AUTHORIZATION_DENIED)
+    doMockMvcPerform(Message.UNAUTHORIZED_BODY)
         .andExpect(content().string(Message.ERROR_BODY));
   }
 
   @Test
   public void whenResponseStatusIsUnauthorized_thenReturnsByStatusCode401() throws Exception {
-    doMockMvcPerform(Message.AUTHORIZATION_DENIED)
+    doMockMvcPerform(Message.UNAUTHORIZED_BODY)
         .andExpect(status().isUnauthorized());
   }
 
   private ResultActions doMockMvcPerform(String authorization) throws Exception {
     return mockMvc.perform(get("/api/pitches")
-        .header(Message.AUTHORIZATION, authorization));
+        .header(Message.HEADER_NAME, authorization));
   }
 }
