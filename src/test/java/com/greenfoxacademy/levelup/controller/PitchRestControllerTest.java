@@ -6,10 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.greenfoxacademy.levelup.collection.Message;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
@@ -21,10 +19,9 @@ import org.springframework.test.web.servlet.ResultActions;
 @WebMvcTest
 public class PitchRestControllerTest {
 
-  private String requestBody;
-
   @Autowired
   MockMvc mockMvc;
+  private String requestBody;
 
   @Test
   public void whenAuthorizationIsOk_thenReturnsStatusCode201() throws Exception {
@@ -32,7 +29,7 @@ public class PitchRestControllerTest {
     mockMvc.perform(post("/api/pitch")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK)
         .contentType(MediaType.APPLICATION_JSON)
-        .content(Message.pitchRequiredBody))
+        .content(Message.PITCH_REQUIRED_BODY))
         .andExpect(status().isCreated());
   }
 
@@ -42,14 +39,15 @@ public class PitchRestControllerTest {
     mockMvc.perform(post("/api/pitch")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED)
         .contentType(MediaType.APPLICATION_JSON)
-        .content(Message.pitchRequiredBody))
+        .content(Message.PITCH_REQUIRED_BODY))
         .andExpect(status().isUnauthorized());
   }
 
   @Test
   public void whenMissingField_thenReturnsStatusCode404() throws Exception {
 
-    requestBody = "{\"oldLVL\": 2,\"pitchMessage\": \"Hello World! My English is bloody gorgeous.\",\"holders\": [\"balazs.jozsef\", \"benedek.vamosi\", \"balazs.barna\"]}";String requiredBody = "{\"oldLVL\": 2,\"pitchedLVL\": 3, pitchMessage\": \"Hello World! My English is bloody gorgeous.\",\"holders\": [\"balazs.jozsef\", \"benedek.vamosi\", \"balazs.barna\"]}";
+    requestBody = "{\"oldLVL\": 2,\"pitchMessage\": \"Hello World! My English is bloody gorgeous.\",\"holders\": [\"balazs.jozsef\", \"benedek.vamosi\", \"balazs.barna\"]}";
+    String requiredBody = "{\"oldLVL\": 2,\"pitchedLVL\": 3, pitchMessage\": \"Hello World! My English is bloody gorgeous.\",\"holders\": [\"balazs.jozsef\", \"benedek.vamosi\", \"balazs.barna\"]}";
 
     mockMvc.perform(post("/api/pitch")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK)
@@ -61,7 +59,7 @@ public class PitchRestControllerTest {
   @Test
   public void whenAuthorizationIsOkAndHasNoMissingField_thenReturnsByStatusCode201()
       throws Exception {
-    requestBody = Message.PITCH_REQUIRED_BODY;
+    requestBody = Message.PITCH_POST_REQUIRED_BODY;
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_OK)
         .andExpect(status().isOk());
@@ -70,7 +68,7 @@ public class PitchRestControllerTest {
   @Test
   public void whenAuthorizationIsOkAndHasNoMissingField_thenReturnsBySuccessfulBody()
       throws Exception {
-    requestBody = Message.PITCH_REQUIRED_BODY;
+    requestBody = Message.PITCH_POST_REQUIRED_BODY;
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_OK)
         .andExpect(content().string(Message.SUCCESSFUL_BODY));
@@ -96,7 +94,7 @@ public class PitchRestControllerTest {
 
   @Test
   public void whenAuthorizationIsUnsuccessful_thenReturnsByStatusCode401() throws Exception {
-    requestBody = Message.PITCH_REQUIRED_BODY;
+    requestBody = Message.PITCH_POST_REQUIRED_BODY;
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_DENIED)
         .andExpect(status().is4xxClientError());
@@ -104,7 +102,7 @@ public class PitchRestControllerTest {
 
   @Test
   public void whenAuthorizationIsUnsuccessful_thenReturnsByUnauthorizedBody() throws Exception {
-    requestBody = Message.PITCH_REQUIRED_BODY;
+    requestBody = Message.PITCH_POST_REQUIRED_BODY;
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_DENIED)
         .andExpect(content().string(Message.UNAUTHORIZED_BODY));

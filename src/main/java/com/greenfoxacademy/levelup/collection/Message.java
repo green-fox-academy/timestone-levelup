@@ -4,9 +4,8 @@ public class Message {
 
   public static final String AUTHORIZATION_DENIED = "Denied";
   public static final String SUCCESSFUL_BODY = "{{\"message\":\"Success\"}";
-  public static final String PITCH_REQUIRED_BODY = "{\"pitcherName\":\"\",\"badgeName\":\"englishspeaker\",\"newStatus\":\"\",\"newMessage\":\"\"}";
-  public static String pitchRequiredBody = "{\"badgeName\": \"English speaker\",\"oldLVL\": 2,\"pitchMessage\": \"Hello World! My English is bloody gorgeous.\",\"holders\": [\"balazs.jozsef\", \"benedek.vamosi\", \"balazs.barna\"]}";
-
+  public static final String PITCH_POST_REQUIRED_BODY = "{\"pitcherName\":\"\",\"badgeName\":\"englishspeaker\",\"newStatus\":\"\",\"newMessage\":\"\"}";
+  public static final String PITCH_REQUIRED_BODY = "{\"badgeName\": \"English speaker\",\"oldLVL\": 2,\"pitchMessage\": \"Hello World! My English is bloody gorgeous.\",\"holders\": [\"balazs.jozsef\", \"benedek.vamosi\", \"balazs.barna\"]}";
   public static final String HEADER_NAME = "Authorization";
   public static final String AUTHORIZATION_OK = "Ok";
   public static final String UNAUTHORIZED_BODY = "{\"error\":\"Unauthorizied\"}";
