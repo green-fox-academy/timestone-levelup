@@ -23,48 +23,37 @@ public class PitchRestControllerTest {
   @Autowired
   MockMvc mockMvc;
 
-  private ResultActions doMockMvcPerform(String content, String authorization) throws Exception {
-    return mockMvc.perform(put("/api/pitch")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(content)
-        .header(Message.AUTHORIZATION, authorization));
-  }
-
   @Test
-  public void whenAuthorizationIsOkAndHasNoMissingField_thenReturnsByStatusCode201() throws Exception {
+  public void whenAuthorizationIsOkAndHasNoMissingField_thenReturnsByStatusCode201()
+      throws Exception {
     requestBody = Message.PITCH_REQUIRED_BODY;
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_OK)
-      .andExpect(status().isOk());
+        .andExpect(status().isOk());
   }
 
   @Test
-  public void whenAuthorizationIsOkAndHasNoMissingField_thenReturnsBySuccessfulBody() throws Exception {
+  public void whenAuthorizationIsOkAndHasNoMissingField_thenReturnsBySuccessfulBody()
+      throws Exception {
     requestBody = Message.PITCH_REQUIRED_BODY;
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_OK)
-      .andExpect(content().string(Message.PITCH_SUCCESSFUL_BODY));
+        .andExpect(content().string(Message.PITCH_SUCCESSFUL_BODY));
   }
 
   @Test
-  public void whenAuthorizationIsOkAndHasMissingField_thenReturnsByStatusCode404() throws Exception {
-    requestBody = "{\n"
-      + "\t\"badgeName\": \"english speaker\",\n"
-      + "\t\"newStatus\": \"\",\n"
-      + "\t\"newMessage\": \"\"\n"
-      + "}\n".replaceAll("\\s", "");
+  public void whenAuthorizationIsOkAndHasMissingField_thenReturnsByStatusCode404()
+      throws Exception {
+    requestBody = "{\"badgeName\":\"englishspeaker\",\"newStatus\":\"\",\"newMessage\":\"\"}";
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_OK)
-      .andExpect(status().isNotFound());
+        .andExpect(status().isNotFound());
   }
 
   @Test
-  public void whenAuthorizationIsOkAndHasMissingField_thenReturns_thenReturnsByUnsuccessfulBody() throws Exception {
-    requestBody = "{\n"
-        + "\t\"badgeName\": \"english speaker\",\n"
-        + "\t\"newStatus\": \"\",\n"
-        + "\t\"newMessage\": \"\"\n"
-        + "}\n".replaceAll("\\s", "");
+  public void whenAuthorizationIsOkAndHasMissingField_thenReturns_thenReturnsByUnsuccessfulBody()
+      throws Exception {
+    requestBody = "{\"badgeName\":\"englishspeaker\",\"newStatus\":\"\",\"newMessage\":\"\"}";
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_OK)
         .andExpect(content().string(Message.PITCH_UNSUCCESSFUL_BODY));
@@ -75,7 +64,7 @@ public class PitchRestControllerTest {
     requestBody = Message.PITCH_REQUIRED_BODY;
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_DENIED)
-      .andExpect(status().is4xxClientError());
+        .andExpect(status().is4xxClientError());
   }
 
   @Test
@@ -84,5 +73,12 @@ public class PitchRestControllerTest {
 
     doMockMvcPerform(requestBody, Message.AUTHORIZATION_DENIED)
         .andExpect(content().string(Message.PITCH_UNAUTHORIZED_BODY));
+  }
+
+  private ResultActions doMockMvcPerform(String content, String authorization) throws Exception {
+    return mockMvc.perform(put("/api/pitch")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(content)
+        .header(Message.AUTHORIZATION, authorization));
   }
 }

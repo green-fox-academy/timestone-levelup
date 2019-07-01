@@ -4,24 +4,16 @@ import java.lang.reflect.Field;
 
 public class Mandatory {
 
-  private String pitcherName ;
-  private String badgeName ;
-  private String newStatus ;
-  private String newMessage ;
+  private String pitcherName;
+  private String badgeName;
+  private String newStatus;
+  private String newMessage;
 
   public Mandatory() {
   }
 
-  public Mandatory(String pitcherName, String badgeName, String newStatus,
-      String newMessage) {
-    this.pitcherName = pitcherName;
-    this.badgeName = badgeName;
-    this.newStatus = newStatus;
-    this.newMessage = newMessage;
-  }
-
   public boolean hasNullField() throws IllegalAccessException {
-    for (Field field: this.getClass().getDeclaredFields()) {
+    for (Field field : this.getClass().getDeclaredFields()) {
       field.setAccessible(true);
       if (field.get(this) == null) {
         return true;
