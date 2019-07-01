@@ -11,15 +11,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @RunWith(SpringRunner.class)
 @WebMvcTest
 public class AddRestControllerTest {
 
-
   @Autowired
   MockMvc mockMvc;
-
 
   @Test
   public void whenAuthorizationIsOkAndHasNoMissingField_thenReturnsStatusCode201() throws Exception {
@@ -29,7 +26,6 @@ public class AddRestControllerTest {
         "  \"tag\": \"general\",\n" +
         "  \"levels\": [1, 2, 3, 4]\n" +
         "}".replaceAll("\\s", "");
-
 
     mockMvc.perform(post("/api/admin/add")
         .contentType(MediaType.APPLICATION_JSON)

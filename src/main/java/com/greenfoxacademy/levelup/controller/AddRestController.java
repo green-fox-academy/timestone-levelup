@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 public class AddRestController {
-
 
   @PostMapping("/api/admin/add")
   public ResponseEntity<String> addAdmin(@RequestHeader(value = "Authorization", required = false)  String authorization, @RequestBody MockBadgeDTO mockBadgeDTO) {
