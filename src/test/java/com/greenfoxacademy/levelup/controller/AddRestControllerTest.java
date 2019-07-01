@@ -29,7 +29,7 @@ public class AddRestControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(requestContent)
         .characterEncoding("utf-8")
-        .header("Authorization", "filled"))
+        .header(Message.HEADER_NAME, "filled"))
         .andDo(print())
         .andExpect(status().isCreated());
   }
@@ -43,7 +43,7 @@ public class AddRestControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(requestContent)
         .characterEncoding("utf-8")
-        .header("Authorization", ""))
+        .header(Message.HEADER_NAME, ""))
         .andDo(print())
         .andExpect(status().isUnauthorized());
   }
@@ -56,7 +56,7 @@ public class AddRestControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(requestContent)
         .characterEncoding("utf-8")
-        .header("Authorization", "filled"))
+        .header(Message.HEADER_NAME, "filled"))
         .andDo(print())
         .andExpect(status().isNotFound());
   }

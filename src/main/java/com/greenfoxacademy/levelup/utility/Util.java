@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 public class Util {
 
   public static ResponseEntity<String> isAuthorized(String authorization) {
-
     if (authorization.equals(Message.AUTHORIZATION_OK)) {
       return new ResponseEntity<>(Message.BODY,
           HttpStatus.OK);
