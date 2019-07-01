@@ -3,7 +3,7 @@ package com.greenfoxacademy.levelup.controller_test;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.greenfoxacademy.levelup.controller.IPitchRestInterface;
+import com.greenfoxacademy.levelup.collection.Message;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +32,7 @@ public class PitchRestControllerTest {
     mockMvc.perform(post("/api/pitch")
             .header("Authorization", "author")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(IPitchRestInterface.pitchRequiredBody))
+            .content(Message.pitchRequiredBody))
             .andExpect(status().isCreated());
   }
 
@@ -41,7 +41,7 @@ public class PitchRestControllerTest {
 
     mockMvc.perform(post("/api/pitch")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(IPitchRestInterface.pitchRequiredBody))
+            .content(Message.pitchRequiredBody))
             .andExpect(status().is4xxClientError());
   }
 

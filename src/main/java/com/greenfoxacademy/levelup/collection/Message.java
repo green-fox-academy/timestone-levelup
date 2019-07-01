@@ -1,6 +1,6 @@
-package com.greenfoxacademy.levelup.controller;
+package com.greenfoxacademy.levelup.collection;
 
-public class IPitchRestInterface {
+public class Message {
   public static String pitchRequiredBody = "{\n"
           + "  \"badgeName\": \"English speaker\",\n"
           + "  \"oldLVL\": 2,\n"

@@ -1,5 +1,6 @@
 package com.greenfoxacademy.levelup.controller;
 
+import com.greenfoxacademy.levelup.collection.Message;
 import com.greenfoxacademy.levelup.model.Pitch;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +16,13 @@ public class PitchRestController {
   public ResponseEntity<String> postPitchApi(@RequestHeader(value = "Authorization", required = false) String authorization, @RequestBody(required = false) Pitch pitch) throws IllegalAccessException {
 
     if (authorization == null || authorization.equals("")) {
-      return new ResponseEntity<>(IPitchRestInterface.pitchUnauthorizedBody,
+      return new ResponseEntity<>(Message.pitchUnauthorizedBody,
               HttpStatus.UNAUTHORIZED);
     } else if (pitch.hasNullField() == true) {
-      return new ResponseEntity<>(IPitchRestInterface.pitchUnsuccesfulBody,
+      return new ResponseEntity<>(Message.pitchUnsuccesfulBody,
               HttpStatus.NOT_FOUND);
     }
-    return new ResponseEntity<>(IPitchRestInterface.pitchSuccessfulBody,
+    return new ResponseEntity<>(Message.pitchSuccessfulBody,
             HttpStatus.CREATED);
   }
 }
