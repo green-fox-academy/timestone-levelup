@@ -1,10 +1,12 @@
 package com.greenfoxacademy.levelup.controller;
 
 import com.greenfoxacademy.levelup.collection.Message;
+import com.greenfoxacademy.levelup.model.Mandatory;
 import com.greenfoxacademy.levelup.model.Pitch;
-import org.springframework.http.HttpStatus;
+import com.greenfoxacademy.levelup.utility.Util;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,17 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PitchRestController {
 
-  @PostMapping("/api/pitch")
-  public ResponseEntity<String> postPitchApi(@RequestHeader(value = "Authorization", required = false) String authorization, @RequestBody(required = false) Pitch pitch) throws IllegalAccessException {
+  @PutMapping("/api/pitch")
+  public ResponseEntity<String> putPitchApi(
+      @RequestHeader(value = Message.HEADER_NAME) String authorization,
+      @RequestBody Mandatory mandatory) throws Exception {
+    return Util.getAuthorizationAndStatusOk(authorization, mandatory);
+  }
 
-    if (authorization == null || authorization.equals("")) {
-      return new ResponseEntity<>(Message.pitchUnauthorizedBody,
-              HttpStatus.UNAUTHORIZED);
-    } else if (pitch.hasNullField() == true) {
-      return new ResponseEntity<>(Message.pitchUnsuccesfulBody,
-              HttpStatus.NOT_FOUND);
-    }
-    return new ResponseEntity<>(Message.pitchSuccessfulBody,
-            HttpStatus.CREATED);
+  @PostMapping("/api/pitch")
+
+  public ResponseEntity<String> postPitchApi(
+      @RequestHeader(value = Message.HEADER_NAME) String authorization,
+      @RequestBody(required = false) Pitch pitch) throws Exception {
+
+    return Util.getAuthorizationAndStatusCreated(authorization, pitch);
   }
 }

@@ -13,6 +13,6 @@ public class PitchesRestController {
   @GetMapping("api/pitches")
   public ResponseEntity<String> getPitchesApi(
       @RequestHeader(Message.HEADER_NAME) String authorization) {
-    return Util.isAuthorized(authorization);
+    return Util.getAuthorization(authorization);
   }
 }

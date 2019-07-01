@@ -35,7 +35,7 @@ public class PitchesRestControllerTest {
   @Test
   public void whenResponseStatusIsUnauthorized_thenReturnsByErrorBody() throws Exception {
     doMockMvcPerform(Message.UNAUTHORIZED_BODY)
-        .andExpect(content().string(Message.ERROR_BODY));
+        .andExpect(content().string(Message.UNAUTHORIZED_BODY));
   }
 
   @Test

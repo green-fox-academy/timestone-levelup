@@ -29,13 +29,13 @@ public class AddRestControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(requestContent)
         .characterEncoding("utf-8")
-        .header(Message.HEADER_NAME, "filled"))
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
         .andDo(print())
         .andExpect(status().isCreated());
   }
 
   @Test
-  public void whenAuthorizationIsMissingAndHasNoMissingField_thenReturnsStatusCode401()
+  public void whenAuthorizationIsDenied_thenReturnsStatusCode401()
       throws Exception {
     String requestContent = Message.ADDADMIN_BODY;
 
@@ -43,20 +43,20 @@ public class AddRestControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(requestContent)
         .characterEncoding("utf-8")
-        .header(Message.HEADER_NAME, ""))
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
         .andDo(print())
         .andExpect(status().isUnauthorized());
   }
 
   @Test
-  public void whenMissingField_thenReturnsStatusCode404() throws Exception {
+  public void whenIsAuthorizedAndMissingField_thenReturnsStatusCode404() throws Exception {
     String requestContent = "{\"version\": \"2.3\",\"name\": \"Badge inserter\",\"levels\": [1, 2, 3, 4]}";
 
     mockMvc.perform(post("/api/admin/add")
         .contentType(MediaType.APPLICATION_JSON)
         .content(requestContent)
         .characterEncoding("utf-8")
-        .header(Message.HEADER_NAME, "filled"))
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
         .andDo(print())
         .andExpect(status().isNotFound());
   }

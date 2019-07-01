@@ -1,9 +1,9 @@
 package com.greenfoxacademy.levelup.model;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 public class Pitch {
+
   private String badgeName;
   private int oldLVL;
   private int pitchedLVL;
@@ -13,7 +13,8 @@ public class Pitch {
   public Pitch() {
   }
 
-  public Pitch(String badgeName, int oldLVL, int pitchedLVL, String pitchMessage, List<String> holders) {
+  public Pitch(String badgeName, int oldLVL, int pitchedLVL, String pitchMessage,
+      List<String> holders) {
     this.badgeName = badgeName;
     this.oldLVL = oldLVL;
     this.pitchedLVL = pitchedLVL;
@@ -61,12 +62,4 @@ public class Pitch {
     this.holders = holders;
   }
 
-  public boolean hasNullField() throws IllegalAccessException {
-    for (Field field : this.getClass().getDeclaredFields()) {
-      if (field.get(this) == null) {
-        return true;
-      }
-    }
-    return false;
-  }
 }

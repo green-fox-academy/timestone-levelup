@@ -14,8 +14,8 @@ public class AddRestController {
 
   @PostMapping("/api/admin/add")
   public ResponseEntity<String> addAdmin(
-      @RequestHeader(value = Message.HEADER_NAME, required = false) String authorization,
-      @RequestBody MockBadgeDTO mockBadgeDTO) {
-    return Util.getAdminObjectAndAuthorization(mockBadgeDTO, authorization);
+      @RequestHeader(value = Message.HEADER_NAME) String authorization,
+      @RequestBody MockBadgeDTO mockBadgeDTO) throws Exception {
+    return Util.getAuthorizationAndStatusCreated(authorization, mockBadgeDTO);
   }
 }
