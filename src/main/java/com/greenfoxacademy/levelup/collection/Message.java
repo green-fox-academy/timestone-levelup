@@ -13,4 +13,5 @@ public class Message {
   public static final String CREATED_BODY = "{\"message\": \"Created\"}";
   public static final String UNSUCCESSFUL_BODY = "{\"error\": \"Please provide all fields\"}";
   public static final String ADDADMIN_BODY = "{\"version\": \"2.3\",\"name\": \"Badge inserter\",\"tag\": \"general\",\"levels\": [1, 2, 3, 4]}";
+
 }
