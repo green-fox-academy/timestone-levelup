@@ -1,4 +1,4 @@
-package com.greenfoxacademy.levelup.controller_test;
+package com.greenfoxacademy.levelup.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
