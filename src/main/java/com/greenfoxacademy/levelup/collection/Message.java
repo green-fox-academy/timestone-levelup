@@ -3,24 +3,24 @@ package com.greenfoxacademy.levelup.collection;
 public class Message {
 
   static final String HEADER_NAME = "Authorization";
-  static final String UNAUTHORIZED_BODY = "{\n"
-      + "  \"error\": \"Unauthorizied\"\n"
-      + "}".replaceAll("\\s", "");
-  static final String SUCCESSFUL_BODY = "{\n"
-      + "  \"message\": \"Created\"\n"
-      + "}".replaceAll("\\s", "");
-  static final String UNSUCCESSFUL_BODY = "{\n"
-      + "  \"error\": \"Please provide all fields\"\n"
-      + "}".replaceAll("\\s", "");
-  static final String AUTHORIZED_BODY = "{\n"
-      + "  \"message\": \"OK\"\n"
-      + "}".replaceAll("\\s", "");
-  static final String ADDADMIN_BODY = "{\n" +
-      "  \"version\": \"2.3\",\n" +
-      "  \"name\": \"Badge inserter\",\n" +
-      "  \"tag\": \"general\",\n" +
-      "  \"levels\": [1, 2, 3, 4]\n" +
-      "}".replaceAll("\\s", "");
+  static final String UNAUTHORIZED_BODY = "{"
+      + "  \"error\": \"Unauthorizied\""
+      + "}";
+  static final String SUCCESSFUL_BODY = "{"
+      + "  \"message\": \"Created\""
+      + "}";
+  static final String UNSUCCESSFUL_BODY = "{"
+      + "  \"error\": \"Please provide all fields\""
+      + "}";
+  static final String AUTHORIZED_BODY = "{"
+      + "  \"message\": \"OK\""
+      + "}";
+  static final String ADDADMIN_BODY = "{" +
+      "  \"version\": \"2.3\"," +
+      "  \"name\": \"Badge inserter\"," +
+      "  \"tag\": \"general\"," +
+      "  \"levels\": [1, 2, 3, 4]" +
+      "}";
 
   public static String getHeaderName() {
     return HEADER_NAME;
