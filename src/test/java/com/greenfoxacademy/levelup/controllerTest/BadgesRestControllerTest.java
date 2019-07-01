@@ -1,5 +1,6 @@
 package com.greenfoxacademy.levelup.controllerTest;
 
+import com.greenfoxacademy.levelup.collection.Message;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,11 +24,18 @@ public class BadgesRestControllerTest {
   
   @Test
   public void isAuthorized() throws Exception {
+    String requiredBody = "{\n"
+            + "  \"name\": \"Process improver\",\n"
+            + "  \"level\": \"1\",\n"
+            + "  \"name\": English speaker\n"
+            + "  \"level\": \"1\",\n"
+            + "  \"name\": \"Feedback giver\",\n"
+            + "  \"level\": \"1\",\n"
+            + "}".replaceAll("\\s", "");
 
     mockMvc.perform(get("/api/badges").header("authorization","author"))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.badges").exists())
-            .andExpect(content().string("{\"badges\":[{\"name\":\"Process improver\",\"level\":\"2\"},{\"name\":\"English speaker\",\"level\":\"1\"},{\"name\":\"Feedback giver\",\"level\":\"1\"}]}"))
+            .andExpect(content().string(requiredBody))
             .andDo(print())
             .andReturn();
   }
@@ -36,8 +44,7 @@ public class BadgesRestControllerTest {
   public void statusIsUnauthorized() throws Exception {
     mockMvc.perform(get("/api/badges"))
             .andExpect(status().isUnauthorized())
-            .andExpect(jsonPath("$.error").exists())
-            .andExpect(jsonPath("$.error").value("Unauthorized"))
+            .andExpect(content().string(Message.badgeUnsuccessfulBody))
             .andDo(print())
             .andReturn();
   }
