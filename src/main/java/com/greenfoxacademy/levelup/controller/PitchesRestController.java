@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class PitchesRestController {
 
   @GetMapping("api/pitches")
-  public ResponseEntity<String> getPitchesApi(@RequestHeader("Authorization") String authorization){
+  public ResponseEntity<String> getPitchesApi(
+      @RequestHeader("Authorization") String authorization) {
     return Util.isAuthorized(authorization);
   }
 }
