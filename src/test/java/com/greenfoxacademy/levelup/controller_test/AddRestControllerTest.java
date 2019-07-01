@@ -20,12 +20,12 @@ public class AddRestControllerTest {
 
   @Test
   public void whenAuthorizationIsOkAndHasNoMissingField_thenReturnsStatusCode201() throws Exception {
-    String requestContent = "{\n" +
-        "  \"version\": \"2.3\",\n" +
-        "  \"name\": \"Badge inserter\",\n" +
-        "  \"tag\": \"general\",\n" +
-        "  \"levels\": [1, 2, 3, 4]\n" +
-        "}".replaceAll("\\s", "");
+    String requestContent = "{" +
+        "  \"version\": \"2.3\"," +
+        "  \"name\": \"Badge inserter\"," +
+        "  \"tag\": \"general\"," +
+        "  \"levels\": [1, 2, 3, 4]" +
+        "}";
 
     mockMvc.perform(post("/api/admin/add")
         .contentType(MediaType.APPLICATION_JSON)
@@ -38,12 +38,12 @@ public class AddRestControllerTest {
 
   @Test
   public void whenAuthorizationIsMissingAndHasNoMissingField_thenReturnsStatusCode401() throws Exception{
-    String requestContent = "{\n" +
-        "  \"version\": \"2.3\",\n" +
-        "  \"name\": \"Badge inserter\",\n" +
-        "  \"tag\": \"general\",\n" +
-        "  \"levels\": [1, 2, 3, 4]\n" +
-        "}".replaceAll("\\s", "");
+    String requestContent = "{" +
+        "  \"version\": \"2.3\"," +
+        "  \"name\": \"Badge inserter\"," +
+        "  \"tag\": \"general\"," +
+        "  \"levels\": [1, 2, 3, 4]" +
+        "}";
 
     mockMvc.perform(post("/api/admin/add")
         .contentType(MediaType.APPLICATION_JSON)
@@ -56,11 +56,11 @@ public class AddRestControllerTest {
 
   @Test
   public void whenMissingField_thenReturnsStatusCode404() throws Exception {
-    String requestContent = "{\n" +
-        "  \"version\": \"2.3\",\n" +
-        "  \"name\": \"Badge inserter\",\n" +
-        "  \"levels\": [1, 2, 3, 4]\n" +
-        "}".replaceAll("\\s", "");
+    String requestContent = "{" +
+        "  \"version\": \"2.3\"," +
+        "  \"name\": \"Badge inserter\"," +
+        "  \"levels\": [1, 2, 3, 4]" +
+        "}";
 
     mockMvc.perform(post("/api/admin/add")
         .contentType(MediaType.APPLICATION_JSON)
