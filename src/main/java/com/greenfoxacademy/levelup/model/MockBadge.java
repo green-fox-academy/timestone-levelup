@@ -1,20 +1,20 @@
 package com.greenfoxacademy.levelup.model;
 
-public class MockObject {
+public class MockBadge {
 
   private Double version;
   private String name;
   private String tag;
   private int[] levels;
 
-  public MockObject(Double version, String name, String tag, int[] levels) {
+  public MockBadge(Double version, String name, String tag, int[] levels) {
     this.version = version;
     this.name = name;
     this.tag = tag;
     this.levels = levels;
   }
 
-  public MockObject(){
+  public MockBadge(){
   }
 
   public Double getVersion() {

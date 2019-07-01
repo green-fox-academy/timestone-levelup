@@ -1,20 +1,20 @@
 package com.greenfoxacademy.levelup.model;
 
-public class MockObjectDTO {
+public class MockBadgeDTO {
 
   private Double version;
   private String name;
   private String tag;
   private int[] levels;
 
-  public MockObjectDTO(MockObject object) {
-    this.version = object.getVersion();
-    this.name = object.getName();
-    this.tag = object.getTag();
-    this.levels = object.getLevels();
+  public MockBadgeDTO(MockBadge mockBadge) {
+    this.version = mockBadge.getVersion();
+    this.name = mockBadge.getName();
+    this.tag = mockBadge.getTag();
+    this.levels = mockBadge.getLevels();
   }
 
-  public MockObjectDTO() {
+  public MockBadgeDTO() {
   }
 
   public Double getVersion() {

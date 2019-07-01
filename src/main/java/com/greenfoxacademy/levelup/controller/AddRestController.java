@@ -1,6 +1,6 @@
 package com.greenfoxacademy.levelup.controller;
 
-import com.greenfoxacademy.levelup.model.MockObjectDTO;
+import com.greenfoxacademy.levelup.model.MockBadgeDTO;
 import com.greenfoxacademy.levelup.utility.Util;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +14,7 @@ public class AddRestController {
 
 
   @PostMapping("/api/admin/add")
-  public ResponseEntity<String> addAdmin(@RequestHeader(value = "Authorization", required = false)  String authorization, @RequestBody MockObjectDTO objectDTO) {
-    return Util.getAdminObjectAndAuthorization(objectDTO, authorization);
+  public ResponseEntity<String> addAdmin(@RequestHeader(value = "Authorization", required = false)  String authorization, @RequestBody MockBadgeDTO mockBadgeDTO) {
+    return Util.getAdminObjectAndAuthorization(mockBadgeDTO, authorization);
   }
 }
