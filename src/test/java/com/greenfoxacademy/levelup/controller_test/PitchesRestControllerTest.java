@@ -24,11 +24,6 @@ public class PitchesRestControllerTest {
   @Autowired
   MockMvc mockMvc;
 
-  private ResultActions doMockMvcPerform(String authorization) throws Exception {
-    return mockMvc.perform(get("/api/pitches")
-        .header(Message.AUTHORIZATION, authorization));
-  }
-
   @Test
   public void whenAuthorizationIsOk_thenReturnsByPitchesApiBody() throws Exception{
     doMockMvcPerform(Message.AUTHORIZATION_OK)
@@ -51,5 +46,10 @@ public class PitchesRestControllerTest {
   public void whenResponseStatusIsUnauthorized_thenReturnsByStatusCode401() throws Exception {
     doMockMvcPerform(Message.AUTHORIZATION_DENIED)
       .andExpect(status().isUnauthorized());
+  }
+
+  private ResultActions doMockMvcPerform(String authorization) throws Exception {
+    return mockMvc.perform(get("/api/pitches")
+        .header(Message.AUTHORIZATION, authorization));
   }
 }
