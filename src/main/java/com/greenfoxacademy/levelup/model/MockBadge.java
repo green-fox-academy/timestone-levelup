@@ -14,7 +14,7 @@ public class MockBadge {
     this.levels = levels;
   }
 
-  public MockBadge(){
+  public MockBadge() {
   }
 
   public Double getVersion() {
