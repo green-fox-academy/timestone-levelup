@@ -18,11 +18,11 @@ public class PitchRestController {
   public ResponseEntity<String> putPitchApi(
       @RequestHeader(value = Message.HEADER_NAME) String authorization,
       @RequestBody Mandatory mandatory) throws Exception {
+
     return Util.getAuthorizationAndStatusOk(authorization, mandatory);
   }
 
   @PostMapping("/api/pitch")
-
   public ResponseEntity<String> postPitchApi(
       @RequestHeader(value = Message.HEADER_NAME) String authorization,
       @RequestBody(required = false) Pitch pitch) throws Exception {
