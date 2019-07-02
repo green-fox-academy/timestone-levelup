@@ -8,55 +8,54 @@ import org.springframework.http.ResponseEntity;
 public class Util {
 
   public static ResponseEntity<String> getAuthorizationAndStatusOk(String authorization,
-                                                                   Object object)
-          throws Exception {
+      Object object)
+      throws Exception {
 
     if (!authorization.equals(Message.AUTHORIZATION_OK)) {
       return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
-              HttpStatus.UNAUTHORIZED);
+          HttpStatus.UNAUTHORIZED);
     }
 
     if (hasNullField(object)) {
       return new ResponseEntity<>(Message.UNSUCCESSFUL_BODY,
-              HttpStatus.NOT_FOUND);
+          HttpStatus.NOT_FOUND);
     }
 
     return new ResponseEntity<>(Message.SUCCESSFUL_BODY,
-            HttpStatus.OK);
+        HttpStatus.OK);
   }
 
   public static ResponseEntity<String> getAuthorizationAndStatusCreated(String authorization,
-                                                                        Object object)
-          throws Exception {
+      Object object)
+      throws Exception {
     if (!authorization.equals(Message.AUTHORIZATION_OK)) {
       return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
-              HttpStatus.UNAUTHORIZED);
+          HttpStatus.UNAUTHORIZED);
     }
 
     if (hasNullField(object)) {
       return new ResponseEntity<>(Message.UNSUCCESSFUL_BODY,
-              HttpStatus.NOT_FOUND);
+          HttpStatus.NOT_FOUND);
     }
 
     return new ResponseEntity<>(Message.CREATED_BODY,
-            HttpStatus.CREATED);
+        HttpStatus.CREATED);
   }
 
   public static ResponseEntity<String> getAuthorization(String authorization) {
     if (authorization.equals(Message.AUTHORIZATION_OK)) {
       return new ResponseEntity<>(Message.BODY,
-              HttpStatus.OK);
+          HttpStatus.OK);
     }
     return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
-            HttpStatus.UNAUTHORIZED);
+        HttpStatus.UNAUTHORIZED);
   }
 
-  public static ResponseEntity<String> showBadges(String authorization) {
-
-    if (authorization == null || authorization.equals("")) {
-      return new ResponseEntity<String>(Message.badgeUnsuccessfulBody, HttpStatus.UNAUTHORIZED);
+  public static ResponseEntity<String> getBadgesAuthorizatioAndStatus(String authorization) {
+    if (!authorization.equals(Message.AUTHORIZATION_OK)) {
+      return new ResponseEntity<>(Message.UNAUTHORIZED_BODY, HttpStatus.UNAUTHORIZED);
     }
-    return new ResponseEntity<String>(Message.badgeSuccessfulBody, HttpStatus.OK);
+    return new ResponseEntity<>(Message.BADGE_SUCCESFUL_BODY, HttpStatus.OK);
   }
 
   private static boolean hasNullField(Object object) throws IllegalAccessException {
