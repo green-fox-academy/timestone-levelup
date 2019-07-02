@@ -13,4 +13,17 @@ public class Message {
   public static final String CREATED_BODY = "{\"message\": \"Created\"}";
   public static final String UNSUCCESSFUL_BODY = "{\"error\": \"Please provide all fields\"}";
   public static final String ADDADMIN_BODY = "{\"version\": \"2.3\",\"name\": \"Badge inserter\",\"tag\": \"general\",\"levels\": [1, 2, 3, 4]}";
+
+  public static String badgeSuccessfulBody  = "{\n"
+          + "  \"name\": \"Process improver\",\n"
+          + "  \"level\": \"1\",\n"
+          + "  \"name\": English speaker\n"
+          + "  \"level\": \"1\",\n"
+          + "  \"name\": \"Feedback giver\",\n"
+          + "  \"level\": \"1\",\n"
+          + "}".replaceAll("\\s", "");
+
+  public static String badgeUnsuccessfulBody = "{\n"
+          + "  \"error\": \"Unauthorized\"\n"
+          + "}".replaceAll("\\s", "");
 }
