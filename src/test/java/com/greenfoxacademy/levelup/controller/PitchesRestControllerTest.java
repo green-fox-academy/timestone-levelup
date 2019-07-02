@@ -22,29 +22,29 @@ public class PitchesRestControllerTest {
 
   @Test
   public void whenAuthorizationIsOk_thenReturnsByPitchesApiBody() throws Exception {
-    doMockMvcPerform(Message.AUTHORIZATION_OK)
+    doMockMvcPerformGet(Message.AUTHORIZATION_OK)
         .andExpect(content().string(Message.BODY));
   }
 
   @Test
   public void whenAuthorizationIsOk_thenReturnsByStatusCode200() throws Exception {
-    doMockMvcPerform(Message.AUTHORIZATION_OK)
+    doMockMvcPerformGet(Message.AUTHORIZATION_OK)
         .andExpect(status().isOk());
   }
 
   @Test
-  public void whenResponseStatusIsUnauthorized_thenReturnsByErrorBody() throws Exception {
-    doMockMvcPerform(Message.UNAUTHORIZED_BODY)
+  public void whenAuthorizationDenied_thenReturnsByErrorBody() throws Exception {
+    doMockMvcPerformGet(Message.UNAUTHORIZED_BODY)
         .andExpect(content().string(Message.UNAUTHORIZED_BODY));
   }
 
   @Test
-  public void whenResponseStatusIsUnauthorized_thenReturnsByStatusCode401() throws Exception {
-    doMockMvcPerform(Message.UNAUTHORIZED_BODY)
+  public void whenGetAuthorizationDenied_thenReturnsByStatusCode401() throws Exception {
+    doMockMvcPerformGet(Message.UNAUTHORIZED_BODY)
         .andExpect(status().isUnauthorized());
   }
 
-  private ResultActions doMockMvcPerform(String authorization) throws Exception {
+  private ResultActions doMockMvcPerformGet(String authorization) throws Exception {
     return mockMvc.perform(get("/api/pitches")
         .header(Message.HEADER_NAME, authorization));
   }
