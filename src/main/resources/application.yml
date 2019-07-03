@@ -1,1 +1,15 @@
-
+spring:
+  datasource:
+    // ${MASTER_DB_URL}
+    url: jdbc:mysql://localhost:3306/mysqltutorial?useSSL=false
+    username: ${MASTER_USERNAME}
+    password: ${MASTER_PASSWORD}
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  profiles:
+    active: dev
