@@ -4,4 +4,8 @@ spring:
     username: ${DEV_USERNAME}
     password: ${DEV_PASSWORD}
 
-    
+security:
+  oauth2:
+    client:
+      clientId: ${CLIENT_ID}
+      clientSecret: ${CLIENT_SECRET}
