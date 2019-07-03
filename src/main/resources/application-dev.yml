@@ -1,8 +1,6 @@
 spring:
-  datasource: jdbc:mysql://localhost:3306/myDb?createDatabaseIfNotExist=true
-    username: ${USR}
-    password: ${PASS}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    driver-class-name: org.h2.Driver
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -19,8 +17,6 @@ spring:
 security:
   oauth2:
     client:
-      clientId: ${CLIENT_ID}
-      clientSecret: ${CLIENT_SECRET}
       accessTokenUri: https://www.googleapis.com/oauth2/v3/token
       userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
       tokenName: oauth_token
