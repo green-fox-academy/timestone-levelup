@@ -1,5 +1,8 @@
 spring:
   datasource:
+    url: ${MASTER_DB_URL}
+    username: ${MASTER_USERNAME}
+    password: ${MASTER_PASSWORD}
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
@@ -13,6 +16,8 @@ spring:
 security:
   oauth2:
     client:
+      clientId: ${CLIENT_ID}
+      clientSecret: ${CLIENT_SECRET}
       accessTokenUri: https://www.googleapis.com/oauth2/v3/token
       userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
       tokenName: oauth_token
