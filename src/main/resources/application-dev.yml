@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  logging:
+    level:
+      org:
+        hibernate:
+          SQL: debug
+
+security:
+  oauth2:
+    client:
+      accessTokenUri: https://www.googleapis.com/oauth2/v3/token
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
+      tokenName: oauth_token
+      authenticationScheme: form
+      scope: profile email
+    resource:
+      userInfoUri: https://www.googleapis.com/userinfo/v2/me
+      preferTokenInfo: false
