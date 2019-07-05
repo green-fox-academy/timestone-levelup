@@ -1,16 +1,22 @@
 package com.greenfoxacademy.levelup.model;
-
 import java.util.List;
 
 public class Badge {
   private long id;
-  private Double version;
+  private String version;
   private String name;
   private String tag;
-  private List<Level> levels;
+  private List<BadgeLevel> levels;
 
-  public Badge(long id, Double version, String name, String tag, List<Level> levels) {
+  public Badge(long id, String version, String name, String tag, List<BadgeLevel> levels) {
     this.id = id;
+    this.version = version;
+    this.name = name;
+    this.tag = tag;
+    this.levels = levels;
+  }
+
+  public Badge(String version, String name, String tag, List<BadgeLevel> levels) {
     this.version = version;
     this.name = name;
     this.tag = tag;
@@ -28,11 +34,11 @@ public class Badge {
     this.id = id;
   }
 
-  public Double getVersion() {
+  public String getVersion() {
     return version;
   }
 
-  public void setVersion(Double version) {
+  public void setVersion(String version) {
     this.version = version;
   }
 
@@ -52,11 +58,11 @@ public class Badge {
     this.tag = tag;
   }
 
-  public List<Level> getLevels() {
+  public List<BadgeLevel> getLevels() {
     return levels;
   }
 
-  public void setLevels(List<Level> levels) {
+  public void setLevels(List<BadgeLevel> levels) {
     this.levels = levels;
   }
 }

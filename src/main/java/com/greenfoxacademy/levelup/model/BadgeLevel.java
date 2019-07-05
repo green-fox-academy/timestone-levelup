@@ -1,16 +1,14 @@
 package com.greenfoxacademy.levelup.model;
-
-
 import java.util.List;
 
-public class Level {
+public class BadgeLevel {
   private long id;
   private int level;
   private int weight;
   private String description;
   private List<Person> holders;
 
-  public Level(long id, int level, int weight, String description, List<Person> holders) {
+  public BadgeLevel(long id, int level, int weight, String description, List<Person> holders) {
     this.id = id;
     this.level = level;
     this.weight = weight;
@@ -18,7 +16,7 @@ public class Level {
     this.holders = holders;
   }
 
-  public Level() {
+  public BadgeLevel() {
   }
 
   public long getId() {
