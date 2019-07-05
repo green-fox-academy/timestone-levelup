@@ -8,6 +8,9 @@ public class Badge {
   private String tag;
   private List<BadgeLevel> levels;
 
+  public Badge() {
+  }
+
   public Badge(long id, String version, String name, String tag, List<BadgeLevel> levels) {
     this.id = id;
     this.version = version;
@@ -21,9 +24,6 @@ public class Badge {
     this.name = name;
     this.tag = tag;
     this.levels = levels;
-  }
-
-  public Badge() {
   }
 
   public long getId() {

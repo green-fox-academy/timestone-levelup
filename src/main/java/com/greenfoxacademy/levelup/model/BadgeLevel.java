@@ -8,15 +8,15 @@ public class BadgeLevel {
   private String description;
   private List<Person> holders;
 
+  public BadgeLevel() {
+  }
+
   public BadgeLevel(long id, int level, int weight, String description, List<Person> holders) {
     this.id = id;
     this.level = level;
     this.weight = weight;
     this.description = description;
     this.holders = holders;
-  }
-
-  public BadgeLevel() {
   }
 
   public long getId() {

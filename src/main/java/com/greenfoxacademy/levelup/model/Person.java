@@ -8,15 +8,15 @@ public class Person {
   private String pic;
   private List<Badge> badges;
 
+  public Person() {
+  }
+
   public Person(long id, String name, String token, String pic, List<Badge> badges) {
     this.id = id;
     this.name = name;
     this.token = token;
     this.pic = pic;
     this.badges = badges;
-  }
-
-  public Person() {
   }
 
   public long getId() {

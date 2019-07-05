@@ -4,12 +4,12 @@ public class PersonDTO {
   private long id;
   private String name;
 
+  public PersonDTO(){
+  }
+
   public PersonDTO(Person person) {
     this.id = person.getId();
     this.name = person.getName();
-  }
-
-  public PersonDTO(){
   }
 
   public long getId() {
