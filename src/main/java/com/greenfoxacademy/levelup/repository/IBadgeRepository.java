@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IBadgeRepository extends CrudRepository<Badge, Level> {
+public interface IBadgeRepository extends CrudRepository<Badge, Long> {
 
 }
