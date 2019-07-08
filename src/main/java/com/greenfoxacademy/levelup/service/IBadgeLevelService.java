@@ -1,7 +1,6 @@
 package com.greenfoxacademy.levelup.service;
 
 import com.greenfoxacademy.levelup.model.BadgeLevel;
-
 import java.util.List;
 
 public interface IBadgeLevelService {

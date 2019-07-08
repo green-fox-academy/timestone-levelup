@@ -3,7 +3,6 @@ package com.greenfoxacademy.levelup.service;
 import com.greenfoxacademy.levelup.model.BadgeLevel;
 import com.greenfoxacademy.levelup.repository.IBadgeLevelRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class BadgeLevelServiceImp implements IBadgeLevelService {
 
   @Override
   public void delete(long id) {
-    badgeLevelRepository.delete(id);
+    badgeLevelRepository.delete(badgeLevelRepository.findById(id).get());
   }
 
   @Override
