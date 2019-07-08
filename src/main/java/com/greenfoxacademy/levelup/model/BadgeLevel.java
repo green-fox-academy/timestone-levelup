@@ -1,10 +1,11 @@
 package com.greenfoxacademy.levelup.model;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class BadgeLevel {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   private int level;
   private int weight;
