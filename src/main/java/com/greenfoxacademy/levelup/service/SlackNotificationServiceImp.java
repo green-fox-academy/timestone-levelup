@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 public class SlackNotificationServiceImp implements ISlackNotificationService {
 
   private static String slackWebhookUrl;
+  private ISlackNotificationService slackNotificationService;
+
 
   public SlackNotificationServiceImp(@Value("${WEBHOOK_URL}") String slackWebhookUrl) {
     SlackNotificationServiceImp.slackWebhookUrl = slackWebhookUrl;
@@ -28,7 +30,7 @@ public class SlackNotificationServiceImp implements ISlackNotificationService {
       ObjectMapper objectMapper = new ObjectMapper();
       String json = objectMapper.writeValueAsString(slackNotification);
 
-      StringEntity entity = new StringEntity(json);
+      StringEntity entity = new StringEntity(json, "UTF-8");
       httpPost.setEntity(entity);
       httpPost.setHeader("Accept", "application/json");
       httpPost.setHeader("Content-type", "application/json");
