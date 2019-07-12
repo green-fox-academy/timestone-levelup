@@ -1,11 +1,18 @@
 package com.greenfoxacademy.levelup.model;
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Person {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   private String name;
   private String token;
   private String pic;
+  @ManyToOne
+  private BadgeLevel badgeLevel;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
   private List<Badge> badges;
 
   public Person() {
@@ -57,5 +64,13 @@ public class Person {
 
   public void setBadges(List<Badge> badges) {
     this.badges = badges;
+  }
+
+  public BadgeLevel getBadgeLevel() {
+    return badgeLevel;
+  }
+
+  public void setBadgeLevel(BadgeLevel badgeLevel) {
+    this.badgeLevel = badgeLevel;
   }
 }
