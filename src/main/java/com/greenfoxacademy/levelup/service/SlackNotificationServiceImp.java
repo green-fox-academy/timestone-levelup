@@ -13,13 +13,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class SlackNotificationServiceImp implements ISlackNotificationService {
 
-  private static String slackWebhookUrl;
+  @Value("${WEBHOOK_URL}")
+  private String slackWebhookUrl;
   private ISlackNotificationService slackNotificationService;
-
-
-  public SlackNotificationServiceImp(@Value("${WEBHOOK_URL}") String slackWebhookUrl) {
-    SlackNotificationServiceImp.slackWebhookUrl = slackWebhookUrl;
-  }
 
   @Override
   public void sendSlackNotification(SlackNotification slackNotification) {
