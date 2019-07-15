@@ -2,13 +2,14 @@ package com.greenfoxacademy.levelup.model;
 
 import java.security.Timestamp;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,11 +31,10 @@ public class Pitch {
   private String pitchedMessage;
   private Timestamp created;
   private List<String> holders;
-  @OneToOne
-  @MapsId
-  private Review review;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "pitch")
+  private Set<Review> reviewSet;
   @ManyToOne
   private BadgeLevel badgeLevel;
   @ManyToOne
-  private Person person;
+  private User user;
 }
