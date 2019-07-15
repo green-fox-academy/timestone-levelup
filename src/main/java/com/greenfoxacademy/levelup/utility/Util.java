@@ -1,14 +1,14 @@
 package com.greenfoxacademy.levelup.utility;
 
 import com.greenfoxacademy.levelup.collection.Message;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.greenfoxacademy.levelup.model.Badge;
 import com.greenfoxacademy.levelup.model.BadgeLevel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Util {
 
@@ -72,7 +72,7 @@ public class Util {
     }
     return false;
   }
-  
+
   public static List<Badge> createListOfBadges() {
     List<BadgeLevel> levels = new ArrayList<>();
     Badge badge1 = new Badge("1.0", "Super Badge", "god", levels);
