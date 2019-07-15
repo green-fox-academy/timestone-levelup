@@ -7,10 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Review {
 
   @Getter
@@ -18,16 +23,9 @@ public class Review {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  private boolean messageResult;
+  private String message;
+  private boolean result;
   @OneToOne(fetch = FetchType.LAZY)
   @MapsId
   private Person person;
-
-  public Review() {
-  }
-
-  public Review(boolean messageResult, Person person) {
-    this.messageResult = messageResult;
-    this.person = person;
-  }
 }
