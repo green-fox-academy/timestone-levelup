@@ -27,7 +27,7 @@ public class Review {
   private boolean result;
   @OneToOne(fetch = FetchType.LAZY)
   @MapsId
-  private Person person;
+  private User user;
   @OneToOne(fetch = FetchType.LAZY)
   @MapsId
   private Pitch pitch;

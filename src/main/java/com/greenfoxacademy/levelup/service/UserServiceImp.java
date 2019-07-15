@@ -1,23 +1,23 @@
 package com.greenfoxacademy.levelup.service;
 
-import com.greenfoxacademy.levelup.model.Person;
-import com.greenfoxacademy.levelup.repository.IPersonRepository;
+import com.greenfoxacademy.levelup.model.User;
+import com.greenfoxacademy.levelup.repository.IUserRepository;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PersonServiceImp implements IPersonService{
+public class UserServiceImp implements IUserService {
 
-  private final IPersonRepository personRepository;
+  private final IUserRepository personRepository;
 
-  public PersonServiceImp(IPersonRepository personRepository) {
+  public UserServiceImp(IUserRepository personRepository) {
     this.personRepository = personRepository;
   }
 
   @Override
-  public void save(Person person) {
-    personRepository.save(person);
+  public void save(User user) {
+    personRepository.save(user);
   }
 
   @Override
@@ -26,14 +26,14 @@ public class PersonServiceImp implements IPersonService{
   }
 
   @Override
-  public List<Person> findAll() {
-    List<Person> persons = new ArrayList<>();
-    personRepository.findAll().forEach(person -> persons.add(person));
-    return persons;
+  public List<User> findAll() {
+    List<User> users = new ArrayList<>();
+    personRepository.findAll().forEach(person -> users.add(person));
+    return users;
   }
 
   @Override
-  public Person findById(long id) {
+  public User findById(long id) {
     return personRepository.findById(id).get();
   }
 }

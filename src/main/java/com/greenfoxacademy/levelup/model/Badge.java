@@ -26,7 +26,7 @@ public class Badge {
   private String name;
   private String tag;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "badge")
-  private Set<BadgeLevel> levels;
+  private Set<BadgeLevel> badgeLevels;
   @ManyToOne
-  private Person person;
+  private User user;
 }

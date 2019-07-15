@@ -1,11 +1,11 @@
 package com.greenfoxacademy.levelup.service;
 
-import com.greenfoxacademy.levelup.model.Person;
+import com.greenfoxacademy.levelup.model.User;
 import java.util.List;
 
-public interface IPersonService {
-  void save(Person person);
+public interface IUserService {
+  void save(User user);
   void delete(long id);
-  List<Person> findAll();
-  Person findById(long id);
+  List<User> findAll();
+  User findById(long id);
 }
