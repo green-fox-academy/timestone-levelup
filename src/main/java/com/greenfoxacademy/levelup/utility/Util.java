@@ -75,7 +75,7 @@ public class Util {
   }
 
   public static ResponseEntity<String> getAuthorizationForHeartbeat(String authorization) {
-    if (authorization.equals(Message.AUTHORIZATION_OK)) {
+    if (authorization != null && authorization.equals("Ok")) {
       return new ResponseEntity<>(Message.AUTHORIZATION_OK,
           HttpStatus.OK);
     }
