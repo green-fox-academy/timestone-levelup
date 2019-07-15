@@ -28,4 +28,7 @@ public class Review {
   @OneToOne(fetch = FetchType.LAZY)
   @MapsId
   private Person person;
+  @OneToOne(fetch = FetchType.LAZY)
+  @MapsId
+  private Pitch pitch;
 }
