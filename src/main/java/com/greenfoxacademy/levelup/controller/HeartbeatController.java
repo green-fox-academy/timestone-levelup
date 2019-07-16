@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class BadgesRestController {
-
-  @GetMapping("/api/badges")
-  public ResponseEntity<String> showBadges(
-      @RequestHeader(value = Message.HEADER_NAME, required = false) String authorization) {
-    return Util.getBadgesAuthorizatioAndStatus(authorization);
+public class HeartbeatController {
+  @GetMapping("/heartbeat")
+  public ResponseEntity<String> showHeartbeat(@RequestHeader(value = Message.HEADER_NAME, required = false) String authorization) {
+    return Util.getAuthorizationForHeartbeat(authorization);
   }
 }
