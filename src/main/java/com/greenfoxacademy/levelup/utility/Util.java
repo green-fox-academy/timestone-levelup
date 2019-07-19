@@ -1,19 +1,19 @@
 package com.greenfoxacademy.levelup.utility;
 
 import com.greenfoxacademy.levelup.collection.Message;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.greenfoxacademy.levelup.model.Badge;
 import com.greenfoxacademy.levelup.model.BadgeLevel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Util {
 
   public static ResponseEntity<String> getAuthorizationAndStatusOk(String authorization,
-      Object object)
+                                                                   Object object)
       throws Exception {
 
     if (!authorization.equals(Message.AUTHORIZATION_OK)) {
@@ -31,7 +31,7 @@ public class Util {
   }
 
   public static ResponseEntity<String> getAuthorizationAndStatusCreated(String authorization,
-      Object object)
+                                                                        Object object)
       throws Exception {
     if (!authorization.equals(Message.AUTHORIZATION_OK)) {
       return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
@@ -71,6 +71,15 @@ public class Util {
       }
     }
     return false;
+  }
+
+  public static ResponseEntity<String> getAuthorizationForHeartbeat(String authorization) {
+    if (authorization != null && authorization.equals("Ok")) {
+      return new ResponseEntity<>(Message.AUTHORIZATION_OK,
+          HttpStatus.OK);
+    }
+    return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
+        HttpStatus.UNAUTHORIZED);
   }
 
   public static List<Badge> createListOfBadges() {
