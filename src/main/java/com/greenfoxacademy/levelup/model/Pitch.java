@@ -1,14 +1,41 @@
 package com.greenfoxacademy.levelup.model;
 
+import java.security.Timestamp;
 import java.util.List;
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@Entity
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Pitch {
-
-  private String badgeName;
-  private int oldLVL;
-  private int pitchedLVL;
-  private String pitchMessage;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
+  private boolean status;
+  private int pitchedLevel;
+  private String pitchedMessage;
+  private Timestamp created;
   private List<String> holders;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "pitch")
+  private Set<Review> reviewSet;
+  @ManyToOne
+  private BadgeLevel badgeLevel;
+  @ManyToOne
+  private User user;
 
   public Pitch() {
   }
@@ -21,45 +48,4 @@ public class Pitch {
     this.pitchMessage = pitchMessage;
     this.holders = holders;
   }
-
-  public String getBadgeName() {
-    return badgeName;
-  }
-
-  public void setBadgeName(String badgeName) {
-    this.badgeName = badgeName;
-  }
-
-  public int getOldLVL() {
-    return oldLVL;
-  }
-
-  public void setOldLVL(int oldLVL) {
-    this.oldLVL = oldLVL;
-  }
-
-  public int getPitchedLVL() {
-    return pitchedLVL;
-  }
-
-  public void setPitchedLVL(int pitchedLVL) {
-    this.pitchedLVL = pitchedLVL;
-  }
-
-  public String getPitchMessage() {
-    return pitchMessage;
-  }
-
-  public void setPitchMessage(String pitchMessage) {
-    this.pitchMessage = pitchMessage;
-  }
-
-  public List<String> getHolders() {
-    return holders;
-  }
-
-  public void setHolders(List<String> holders) {
-    this.holders = holders;
-  }
-
 }
