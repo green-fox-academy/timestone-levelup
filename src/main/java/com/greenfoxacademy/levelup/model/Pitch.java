@@ -22,7 +22,6 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Pitch {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
@@ -37,4 +36,16 @@ public class Pitch {
   private BadgeLevel badgeLevel;
   @ManyToOne
   private User user;
+
+  public Pitch() {
+  }
+
+  public Pitch(String badgeName, int oldLVL, int pitchedLVL, String pitchMessage,
+      List<String> holders) {
+    this.badgeName = badgeName;
+    this.oldLVL = oldLVL;
+    this.pitchedLVL = pitchedLVL;
+    this.pitchMessage = pitchMessage;
+    this.holders = holders;
+  }
 }
