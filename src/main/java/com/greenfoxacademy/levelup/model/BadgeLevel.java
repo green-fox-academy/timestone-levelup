@@ -18,7 +18,7 @@ public class BadgeLevel {
   public BadgeLevel() {
   }
 
-  public BadgeLevel(long id, int level, int weight, String description, List<Person> holders) {
+  public BadgeLevel(int level, int weight, String description, List<Person> holders) {
     this.id = id;
     this.level = level;
     this.weight = weight;
