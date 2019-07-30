@@ -34,9 +34,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   public AuthenticationFailureHandler customAuthenticationFailureHandler() {
     return new CustomAuthenticationFailureHandler();
   }
-
-  @Bean
-  public ResourceServerProperties resourceServerProperties() {
-    return new ResourceServerProperties();
-  }
 }

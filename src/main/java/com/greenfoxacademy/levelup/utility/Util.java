@@ -83,15 +83,15 @@ public class Util {
 
   public static List<Badge> createListOfBadges() {
     List<BadgeLevel> levels = new ArrayList<>();
-    Badge badge1 = new Badge("1.0", "Super Badge", "god", levels);
-    Badge badge2 = new Badge("2.0", "Best Mentor", "mentor", levels);
-    Badge badge3 = new Badge("3.0", "Best Colleague", "general", levels);
-    Badge badge4 = new Badge("4.0", "Lame Jokes", "general", levels);
+//    Badge badge1 = new Badge("1.0", "Super Badge", "god", levels);
+//    Badge badge2 = new Badge("2.0", "Best Mentor", "mentor", levels);
+//    Badge badge3 = new Badge("3.0", "Best Colleague", "general", levels);
+//    Badge badge4 = new Badge("4.0", "Lame Jokes", "general", levels);
     List<Badge> badges = new ArrayList<>();
-    badges.add(badge1);
-    badges.add(badge2);
-    badges.add(badge3);
-    badges.add(badge4);
+//    badges.add(badge1);
+//    badges.add(badge2);
+//    badges.add(badge3);
+//    badges.add(badge4);
     return badges;
   }
 }
