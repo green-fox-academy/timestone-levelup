@@ -14,7 +14,6 @@ public class BadgeLibraryController {
     this.badgeService = badgeService;
   }
 
-
   @GetMapping("/badgelibrary")
   public String renderAllBadges(Model model) {
     model.addAttribute("badges", badgeService.findAll());
