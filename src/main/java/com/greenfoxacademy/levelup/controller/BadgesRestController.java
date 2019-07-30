@@ -21,9 +21,4 @@ public class BadgesRestController {
       @RequestHeader(value = Message.HEADER_NAME, required = false) String authorization) {
     return Util.getBadgesAuthorizationAndStatus(authorization);
   }
-
-  @PostMapping("/api/badges")
-  public ResponseEntity<String> postBadges(@RequestHeader(value = Message.HEADER_NAME, required = false) String authorization, @RequestBody Badge badge) throws Exception {
-    return Util.getAuthorizationAndStatusCreated(authorization, badge);
-  }
 }
