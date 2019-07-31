@@ -1,15 +1,15 @@
 package com.greenfoxacademy.levelup.model;
 
-public class PersonDTO {
+public class UserDTO {
   private long id;
   private String name;
 
-  public PersonDTO(){
+  public UserDTO(){
   }
 
-  public PersonDTO(Person person) {
-    this.id = person.getId();
-    this.name = person.getName();
+  public UserDTO(User user) {
+    this.id = user.getId();
+    this.name = user.getName();
   }
 
   public long getId() {
