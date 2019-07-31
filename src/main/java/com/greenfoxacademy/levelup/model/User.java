@@ -1,16 +1,13 @@
 package com.greenfoxacademy.levelup.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -26,10 +23,8 @@ public class User {
   private String role;
   @ManyToOne
   private BadgeLevel badgeLevel;
-  @OneToMany
-  @MapsId
-  private Review review;
-  @OneToMany
-  @MapsId
-  private Pitch pitch;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+  private Set<Review> review;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+  private Set<Pitch> pitch;
 }

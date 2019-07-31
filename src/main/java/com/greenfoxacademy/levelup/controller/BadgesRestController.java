@@ -12,7 +12,7 @@ public class BadgesRestController {
   @GetMapping("/api/badges")
   public ResponseEntity<String> showBadges(
       @RequestHeader(value = Message.HEADER_NAME, required = false) String authorization) {
-    return Util.getBadgesAuthorizatioAndStatus(authorization);
+    return Util.getBadgesAuthorizationAndStatus(authorization);
   }
 
   @PostMapping("/api/badges")

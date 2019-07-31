@@ -57,8 +57,8 @@ public class Util {
         HttpStatus.UNAUTHORIZED);
   }
 
-  public static ResponseEntity<String> getBadgesAuthorizatioAndStatus(String authorization) {
-    if (!authorization.equals(Message.AUTHORIZATION_OK)) {
+  public static ResponseEntity<String> getBadgesAuthorizationAndStatus(String authorization) {
+    if (authorization == null || !authorization.equals(Message.AUTHORIZATION_OK)) {
       return new ResponseEntity<>(Message.UNAUTHORIZED_BODY, HttpStatus.UNAUTHORIZED);
     }
     return new ResponseEntity<>(Message.BADGE_SUCCESFUL_BODY, HttpStatus.OK);
@@ -81,19 +81,5 @@ public class Util {
     }
     return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
         HttpStatus.UNAUTHORIZED);
-  }
-
-  public static List<Badge> createListOfBadges() {
-    List<BadgeLevel> levels = new ArrayList<>();
-    Badge badge1 = new Badge("1.0", "Super Badge", "god", levels);
-    Badge badge2 = new Badge("2.0", "Best Mentor", "mentor", levels);
-    Badge badge3 = new Badge("3.0", "Best Colleague", "general", levels);
-    Badge badge4 = new Badge("4.0", "Lame Jokes", "general", levels);
-    List<Badge> badges = new ArrayList<>();
-    badges.add(badge1);
-    badges.add(badge2);
-    badges.add(badge3);
-    badges.add(badge4);
-    return badges;
   }
 }
