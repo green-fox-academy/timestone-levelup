@@ -47,17 +47,17 @@ public class BadgeServiceImp implements IBadgeService {
       return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
           HttpStatus.UNAUTHORIZED);
     }
-    return new ResponseEntity<>(badgesToJsonStrings(findAll()),
+    return new ResponseEntity<>(badgesToJsons(findAll()),
         HttpStatus.OK);
   }
 
   @Override
-  public String badgesToJsonStrings(List<Badge> badgeList) {
+  public String badgesToJsons(List<Badge> badgeList) {
     String[] badgesJsonArray = new String[]{""};
     badgeList.forEach(badge -> {
       Gson gson = new Gson();
       String badgeJson = gson.toJson(badge);
-      badgesJsonArray[0] =  badgesJsonArray[0].concat("\n" + (badgeJson));
+      badgesJsonArray[0] =  badgesJsonArray[0].concat(badgeJson + "\n");
     });
     return badgesJsonArray[0];
   }

@@ -9,6 +9,6 @@ public interface IBadgeService {
   void delete(long id);
   List<Badge> findAll();
   Badge findById(long id);
-  String badgesToJsonStrings(List<Badge> badgeList);
+  String badgesToJsons(List<Badge> badgeList);
   ResponseEntity<String> getBadgesJsonObjects(String authorization);
 }
