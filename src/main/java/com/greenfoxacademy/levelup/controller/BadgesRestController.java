@@ -10,12 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BadgesRestController {
+
   @Autowired
   private IBadgeService badgeService;
-
-//  public BadgesRestController(IBadgeService badgeService) {
-//    this.badgeService = badgeService;
-//  }
 
   @GetMapping("/api/badges")
   public ResponseEntity<String> showBadges(
