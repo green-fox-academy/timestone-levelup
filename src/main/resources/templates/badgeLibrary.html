@@ -15,10 +15,10 @@
   </thead>
   <tbody>
   <tr class="table-dark" th:each="badge : ${badges}">
-    <td th:text="${badge.version}"></td>
-    <td th:text="${badge.name}"></td>
-    <td th:text="${badge.tag}"></td>
-    <td th:text="${badge.levels}"></td>
+    <td th:text="${badge.getVersion()}"></td>
+    <td th:text="${badge.getName()}"></td>
+    <td th:text="${badge.getTag()}"></td>
+    <td th:text="${badge.getLevels()}"></td>
   </tr>
   </tbody>
 </table>
