@@ -10,7 +10,7 @@ import java.security.Principal;
 public class TokenRestController {
 
   @GetMapping("/token")
-  public Object currentUserName(Principal principal) {
+  public Principal currentUserName(Principal principal) {
     GenerateToken.createJWT();
     return principal;
   }

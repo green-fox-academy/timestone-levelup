@@ -13,9 +13,10 @@ import java.util.Date;
 
 public class GenerateToken {
 
-  private static String SECRET_KEY = "48215E15BBFBC6A43521AB86B9EE528095D287CC9433EEEFB3E288AF059CD07E";
-
   public static String createJWT() {
+
+    String secretKey = System.getenv("SECRET_KEY");
+
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     String currentPrincipalName = authentication.getName();
 
@@ -23,17 +24,16 @@ public class GenerateToken {
 
     long nowMillis = System.currentTimeMillis();
     Date now = new Date(nowMillis);
-    long ttlMillis = 3600000;
+    long ttlMillis = 3600000; // 1 hour
     long expMillis = nowMillis + ttlMillis;
     Date exp = new Date(expMillis);
 
-    byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
+    byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(secretKey);
     Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
     JwtBuilder builder = Jwts.builder()
             .setIssuedAt(now)
             .setSubject(currentPrincipalName)
-            .setIssuer("Alpine")
             .setExpiration(exp)
             .signWith(signatureAlgorithm, signingKey);
 
