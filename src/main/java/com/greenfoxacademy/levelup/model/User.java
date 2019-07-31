@@ -31,9 +31,7 @@ public class User {
   @ManyToOne
   private BadgeLevel badgeLevel;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-//  @MapsId
   private Set<Review> review;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-//  @MapsId
   private Set<Pitch> pitch;
 }

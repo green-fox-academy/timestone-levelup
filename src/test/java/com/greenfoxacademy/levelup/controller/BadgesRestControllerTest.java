@@ -38,7 +38,7 @@ public class BadgesRestControllerTest {
   private MockMvc mockMvc;
 
   @InjectMocks
-  private IBadgeService badgeService = new BadgeServiceImp();
+  private BadgeServiceImp badgeServiceImp;
 
   @MockBean
   private IBadgeRepository badgeRepository;

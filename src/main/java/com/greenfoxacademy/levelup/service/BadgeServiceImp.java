@@ -16,9 +16,6 @@ public class BadgeServiceImp implements IBadgeService {
   @Autowired
   private IBadgeRepository badgeRepository;
 
-  public BadgeServiceImp() {
-  }
-
   @Override
   public void save(Badge badge) {
     badgeRepository.save(badge);
