@@ -58,7 +58,7 @@ public class Util {
   }
 
   public static ResponseEntity<String> getBadgesAuthorizationAndStatus(String authorization) {
-    if (!authorization.equals(Message.AUTHORIZATION_OK)) {
+    if (authorization == null || !authorization.equals(Message.AUTHORIZATION_OK)) {
       return new ResponseEntity<>(Message.UNAUTHORIZED_BODY, HttpStatus.UNAUTHORIZED);
     }
     return new ResponseEntity<>(Message.BADGE_SUCCESFUL_BODY, HttpStatus.OK);
