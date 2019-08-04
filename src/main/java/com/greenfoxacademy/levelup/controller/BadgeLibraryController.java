@@ -10,7 +10,6 @@ public class BadgeLibraryController {
 
   @GetMapping("/badgelibrary")
   public String renderAllBadges(Model model) {
-    model.addAttribute("badges", Util.createListOfBadges());
     return "badgeLibrary";
   }
 }
