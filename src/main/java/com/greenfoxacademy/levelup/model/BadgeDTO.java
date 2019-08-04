@@ -1,26 +1,23 @@
 package com.greenfoxacademy.levelup.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class MockBadgeDTO {
+@NoArgsConstructor
+@RequiredArgsConstructor
+public class BadgeDTO {
 
   private long id;
+  @NonNull
   private String version;
+  @NonNull
   private String name;
+  @NonNull
   private String tag;
   private int[] levels;
-
-  public MockBadgeDTO(MockBadge mockBadge) {
-    this.version = mockBadge.getVersion();
-    this.name = mockBadge.getName();
-    this.tag = mockBadge.getTag();
-    this.levels = mockBadge.getLevels();
-  }
-
-  public MockBadgeDTO() {
-  }
-
 }

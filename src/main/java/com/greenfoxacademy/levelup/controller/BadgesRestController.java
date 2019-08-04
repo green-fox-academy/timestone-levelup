@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BadgesRestController {
   @Autowired
-  IBadgeService badgeService;
+  private IBadgeService badgeService;
 
   @GetMapping("/api/badges")
   public ResponseEntity<String> showBadges(
