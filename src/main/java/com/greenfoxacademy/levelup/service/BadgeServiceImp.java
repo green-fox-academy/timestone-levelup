@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.greenfoxacademy.levelup.collection.Message;
 import com.greenfoxacademy.levelup.model.Badge;
 import com.greenfoxacademy.levelup.repository.IBadgeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,13 +13,8 @@ import java.util.List;
 
 @Service
 public class BadgeServiceImp implements IBadgeService{
-
-  private final IBadgeRepository badgeRepository;
-
-  public BadgeServiceImp(IBadgeRepository badgeRepository) {
-    this.badgeRepository = badgeRepository;
-  }
-
+  @Autowired
+  private IBadgeRepository badgeRepository;
   @Override
   public void save(Badge badge) {
     badgeRepository.save(badge);

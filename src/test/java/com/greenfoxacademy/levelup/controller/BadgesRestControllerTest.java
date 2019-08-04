@@ -1,15 +1,16 @@
 package com.greenfoxacademy.levelup.controller;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.google.gson.Gson;
 import com.greenfoxacademy.levelup.collection.Message;
 import com.greenfoxacademy.levelup.model.Badge;
 import com.greenfoxacademy.levelup.repository.IBadgeRepository;
 import com.greenfoxacademy.levelup.service.BadgeServiceImp;
-import com.greenfoxacademy.levelup.service.IBadgeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest
+@WebMvcTest(controllers = BadgesRestController.class, secure = false)
 public class BadgesRestControllerTest {
 
   private Badge badge;
@@ -33,7 +34,7 @@ public class BadgesRestControllerTest {
   private MockMvc mockMvc;
 
   @InjectMocks
-  private IBadgeService badgeServiceImp;
+  private BadgeServiceImp badgeService;
 
   @MockBean
   private IBadgeRepository badgeRepository;
@@ -49,6 +50,17 @@ public class BadgesRestControllerTest {
     mockMvc.perform(get("/api/badge/1")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
         .andExpect(status().isOk())
+        .andDo(print())
+        .andReturn();
+  }
+
+  @Test
+  public void testIfAuthorizationOK_thenReturnsBadgesJsonObjects() throws Exception {
+    when(badgeRepository.findById(1L)).thenReturn(java.util.Optional.ofNullable(badge));
+
+    mockMvc.perform(get("/api/badge/1")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
+        .andExpect(content().string(new Gson().toJson(badge)))
         .andDo(print())
         .andReturn();
   }
@@ -73,6 +85,7 @@ public class BadgesRestControllerTest {
 
   @TestConfiguration
   static class BadgeServiceImpTestContextConfiguration {
+
     @Bean
     public BadgeServiceImp badgeService() {
       return new BadgeServiceImp();
