@@ -21,7 +21,7 @@ public class BadgesRestController {
     return Util.getBadgesAuthorizatioAndStatus(authorization);
   }
 
-  @GetMapping("/api/badges/{badgeid}")
+  @GetMapping("/api/badge/{badgeid}")
   public ResponseEntity<String> getBadgeJsonById(@PathVariable(name = "badgeid") long badgeId,
       @RequestHeader(value = Message.HEADER_NAME, required = false) String authorization) {
     return badgeService.getBadgeJsonById(badgeId, authorization);
