@@ -4,17 +4,19 @@ import com.google.gson.Gson;
 import com.greenfoxacademy.levelup.collection.Message;
 import com.greenfoxacademy.levelup.model.Badge;
 import com.greenfoxacademy.levelup.repository.IBadgeRepository;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
-public class BadgeServiceImp implements IBadgeService{
+public class BadgeServiceImp implements IBadgeService {
+
   @Autowired
   private IBadgeRepository badgeRepository;
+
   @Override
   public void save(Badge badge) {
     badgeRepository.save(badge);
@@ -39,6 +41,7 @@ public class BadgeServiceImp implements IBadgeService{
 
   @Override
   public ResponseEntity<String> getBadgeJsonById(long id, String authorization) {
+
     if (authorization == null || !authorization.equals(Message.AUTHORIZATION_OK)) {
       return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
           HttpStatus.UNAUTHORIZED);
@@ -47,8 +50,27 @@ public class BadgeServiceImp implements IBadgeService{
         HttpStatus.OK);
   }
 
+  public ResponseEntity<String> getBadgesJsonObjects(String authorization) {
+    if (authorization == null || !authorization.equals(Message.AUTHORIZATION_OK)) {
+      return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
+          HttpStatus.UNAUTHORIZED);
+    }
+    return new ResponseEntity<>(badgesToJsons(findAll()),
+        HttpStatus.OK);
+  }
+
   private String convertModel2Json(Object object) {
     Gson gson = new Gson();
     return gson.toJson(object);
+  }
+
+  private String badgesToJsons(List<Badge> badgeList) {
+    String[] badgesJsonArray = new String[]{""};
+    badgeList.forEach(badge -> {
+      Gson gson = new Gson();
+      String badgeJson = gson.toJson(badge);
+      badgesJsonArray[0] = badgesJsonArray[0].concat(badgeJson + "\n");
+    });
+    return badgesJsonArray[0];
   }
 }

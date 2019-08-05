@@ -11,6 +11,8 @@ import com.greenfoxacademy.levelup.collection.Message;
 import com.greenfoxacademy.levelup.model.Badge;
 import com.greenfoxacademy.levelup.repository.IBadgeRepository;
 import com.greenfoxacademy.levelup.service.BadgeServiceImp;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,12 +31,13 @@ import org.springframework.test.web.servlet.MockMvc;
 public class BadgesRestControllerTest {
 
   private Badge badge;
+  private List<Badge> badgeList;
 
   @Autowired
   private MockMvc mockMvc;
 
   @InjectMocks
-  private BadgeServiceImp badgeService;
+  private BadgeServiceImp badgeServiceImp;
 
   @MockBean
   private IBadgeRepository badgeRepository;
@@ -43,10 +46,12 @@ public class BadgesRestControllerTest {
   public void setup() {
     MockitoAnnotations.initMocks(this);
     badge = new Badge("2.3", "Process improver/initator", "general");
+    badgeList = new ArrayList<>();
+    badgeList.add(badge);
   }
 
   @Test
-  public void testIfAuthorizationOK_thenReturnsStatusOk() throws Exception {
+  public void testIfAuthorizationOKAtBadgeId_thenReturnsStatusOk() throws Exception {
     mockMvc.perform(get("/api/badge/1")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
         .andExpect(status().isOk())
@@ -55,12 +60,31 @@ public class BadgesRestControllerTest {
   }
 
   @Test
-  public void testIfAuthorizationOK_thenReturnsBadgesJsonObjects() throws Exception {
+  public void testIfAuthorizationOK_thenReturnsStatusOk() throws Exception {
+    mockMvc.perform(get("/api/badges")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
+        .andExpect(status().isOk())
+        .andDo(print())
+        .andReturn();
+  }
+
+
+  @Test
+  public void testIfAuthorizationOK_thenReturnsBadgesJsonObjectById() throws Exception {
     when(badgeRepository.findById(1L)).thenReturn(java.util.Optional.ofNullable(badge));
 
     mockMvc.perform(get("/api/badge/1")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
-        .andExpect(content().string(new Gson().toJson(badge)))
+        .andExpect(content().string(new Gson().toJson(badge)));
+  }
+
+  @Test
+  public void testIfAuthorizationOK_thenReturnsBadgesJsonObjects() throws Exception {
+    when(badgeRepository.findAll()).thenReturn(badgeList);
+
+    mockMvc.perform(get("/api/badges")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
+        .andExpect(content().string(new Gson().toJson(badge) + "\n"))
         .andDo(print())
         .andReturn();
   }
@@ -77,6 +101,26 @@ public class BadgesRestControllerTest {
   @Test
   public void testWhenStatusIsUnauthorized_thenReturnsUnauthorizedErrorBody() throws Exception {
     mockMvc.perform(get("/api/badges")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
+        .andExpect(content().string(Message.UNAUTHORIZED_BODY))
+        .andDo(print())
+        .andReturn();
+  }
+
+  @Test
+  public void testWhenStatusIsUnauthorizedAtBadgeId_thenReturnsStatusUnauthorized()
+      throws Exception {
+    mockMvc.perform(get("/api/badge/1")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
+        .andExpect(status().isUnauthorized())
+        .andDo(print())
+        .andReturn();
+  }
+
+  @Test
+  public void testWhenStatusIsUnauthorizedAtBadgeId_thenReturnsUnauthorizedErrorBody()
+      throws Exception {
+    mockMvc.perform(get("/api/badge/1")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
         .andExpect(content().string(Message.UNAUTHORIZED_BODY))
         .andDo(print())

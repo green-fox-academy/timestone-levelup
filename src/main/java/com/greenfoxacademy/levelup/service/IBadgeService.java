@@ -10,4 +10,5 @@ public interface IBadgeService {
   List<Badge> findAll();
   Badge findById(long id);
   ResponseEntity<String> getBadgeJsonById(long id, String authorization);
+  ResponseEntity<String> getBadgesJsonObjects(String authorization);
 }

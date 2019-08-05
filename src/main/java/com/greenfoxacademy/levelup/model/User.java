@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -19,16 +20,18 @@ import lombok.Setter;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Entity
-public class BadgeLevel {
+public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  private int level;
-  private int weight;
-  private String description;
+  private String name;
+  private String email;
+  private String role;
   @ManyToOne
-  private Badge badge;
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "badgeLevel")
-  private Set<User> userSet;
+  private BadgeLevel badgeLevel;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+  private Set<Review> review;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+  private Set<Pitch> pitch;
 }
