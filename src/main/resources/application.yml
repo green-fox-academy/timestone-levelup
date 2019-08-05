@@ -26,3 +26,4 @@ security:
     resource:
       userInfoUri: https://www.googleapis.com/userinfo/v2/me
       preferTokenInfo: false
+
