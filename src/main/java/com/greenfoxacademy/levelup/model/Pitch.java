@@ -20,7 +20,6 @@ public class Pitch {
   private int pitchedLevel;
   private String pitchedMessage;
   private Timestamp created;
-  private List<String> holders;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "pitch")
   private Set<Review> reviewSet;
   @ManyToOne
@@ -28,3 +27,4 @@ public class Pitch {
   @ManyToOne
   private User user;
 }
+

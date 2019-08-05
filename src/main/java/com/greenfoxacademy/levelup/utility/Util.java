@@ -1,6 +1,11 @@
 package com.greenfoxacademy.levelup.utility;
 
 import com.greenfoxacademy.levelup.collection.Message;
+import com.greenfoxacademy.levelup.model.Badge;
+import com.greenfoxacademy.levelup.model.BadgeLevel;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -50,13 +55,6 @@ public class Util {
     }
     return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
         HttpStatus.UNAUTHORIZED);
-  }
-
-  public static ResponseEntity<String> getBadgesAuthorizatioAndStatus(String authorization) {
-    if (!authorization.equals(Message.AUTHORIZATION_OK)) {
-      return new ResponseEntity<>(Message.UNAUTHORIZED_BODY, HttpStatus.UNAUTHORIZED);
-    }
-    return new ResponseEntity<>(Message.BADGE_SUCCESFUL_BODY, HttpStatus.OK);
   }
 
   private static boolean hasNullField(Object object) throws IllegalAccessException {
