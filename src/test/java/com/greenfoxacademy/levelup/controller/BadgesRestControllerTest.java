@@ -75,7 +75,7 @@ public class BadgesRestControllerTest {
   }
 
   @Test
-  public void testWhenStatusIsUnauthorized_thenReturnsUnauthorizedErrorBodyd() throws Exception {
+  public void testWhenStatusIsUnauthorized_thenReturnsUnauthorizedErrorBody() throws Exception {
     mockMvc.perform(get("/api/badges")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
         .andExpect(content().string(Message.UNAUTHORIZED_BODY))
