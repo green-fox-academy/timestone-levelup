@@ -7,10 +7,10 @@ public class UserDTO {
   public UserDTO(){
   }
 
-  public UserDTO(User user) {
+  /*public UserDTO(User user) {
     this.id = user.getId();
     this.name = user.getName();
-  }
+  }*/
 
   public long getId() {
     return id;

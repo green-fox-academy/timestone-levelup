@@ -11,32 +11,25 @@ import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
 
-public class GenerateToken {
+public class TokenGenerator {
 
   public static String createJWT() {
-
     String secretKey = System.getenv("SECRET_KEY");
-
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     String currentPrincipalName = authentication.getName();
-
     SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-
     long nowMillis = System.currentTimeMillis();
     Date now = new Date(nowMillis);
-    long ttlMillis = 3600000; // 1 hour
-    long expMillis = nowMillis + ttlMillis;
-    Date exp = new Date(expMillis);
-
+    long validationTimeInMillis = 3600000; // 1 hour
+    long expectedTimeInMillis = nowMillis + validationTimeInMillis;
+    Date expectedTime = new Date(expectedTimeInMillis);
     byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(secretKey);
     Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
-
     JwtBuilder builder = Jwts.builder()
             .setIssuedAt(now)
             .setSubject(currentPrincipalName)
-            .setExpiration(exp)
+            .setExpiration(expectedTime)
             .signWith(signatureAlgorithm, signingKey);
-
     return builder.compact();
   }
 }
