@@ -81,7 +81,6 @@ public class Util {
   }
 
   public static String convertListOfBadgeToJson(List<Badge> models) {
-
     String modelsJsonString = models.stream().map(model -> convertModelToJson(model)).collect(Collectors.joining("\n"));
     return modelsJsonString;
   }
