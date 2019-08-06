@@ -52,5 +52,11 @@ dependencies {
     compile 'org.hibernate:hibernate-entitymanager:5.4.2.Final'
     compile 'org.hibernate:hibernate-core:5.2.1.Final'
 
+
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+
 }

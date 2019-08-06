@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.security.Timestamp;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -20,7 +19,6 @@ public class Pitch {
   private int pitchedLevel;
   private String pitchedMessage;
   private Timestamp created;
-  private List<String> holders;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "pitch")
   private Set<Review> reviewSet;
   @ManyToOne
