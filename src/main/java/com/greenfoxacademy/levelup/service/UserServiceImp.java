@@ -1,7 +1,11 @@
 package com.greenfoxacademy.levelup.service;
 
+import com.greenfoxacademy.levelup.collection.Message;
 import com.greenfoxacademy.levelup.model.User;
 import com.greenfoxacademy.levelup.repository.IUserRepository;
+import com.greenfoxacademy.levelup.utility.Util;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,5 +39,13 @@ public class UserServiceImp implements IUserService {
   @Override
   public User findById(long id) {
     return personRepository.findById(id).get();
+  }
+
+  @Override
+  public ResponseEntity<String> getUserJsonObjects(String authorization) {
+    if (authorization == null || !authorization.equals(Message.AUTHORIZATION_OK)) {
+      return new ResponseEntity<>(Message.UNAUTHORIZED_BODY, HttpStatus.UNAUTHORIZED);
+    }
+    return new ResponseEntity<>(Util.convertListOfUserToJson(findAll()), HttpStatus.OK);
   }
 }
