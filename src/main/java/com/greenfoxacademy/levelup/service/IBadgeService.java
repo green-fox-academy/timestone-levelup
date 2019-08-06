@@ -11,4 +11,5 @@ public interface IBadgeService {
   Badge findById(long id);
   String badgesToJsons(List<Badge> badgeList);
   ResponseEntity<String> getBadgesJsonObjects(String authorization);
+  ResponseEntity<String> getAuthorizationAndStatusCreated(String authorization, Object object);
 }

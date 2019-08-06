@@ -1,6 +1,6 @@
 package com.greenfoxacademy.levelup.controller;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -29,6 +29,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = BadgesRestController.class, secure = false)
@@ -85,18 +86,17 @@ public class BadgesRestControllerTest {
   }
 
   @Test
-  public void testWhenStatusIsUnauthorized_thenReturnsUnauthorizedErrorBodyd() throws Exception {
+  public void testWhenStatusIsUnauthorized_thenReturnsUnauthorizedErrorBody() throws Exception {
     mockMvc.perform(get("/api/badges")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
         .andExpect(content().string(Message.UNAUTHORIZED_BODY))
         .andDo(print())
         .andReturn();
   }
-  
-  @Test
-  public void testIfAuthorizationOK_thenReturnsStatusCreated() throws Exception {
-    String requestContent = "{\"version\": \"2.3\",\"name\": \"Badge inserter\",\"tag\": \"general\",\"levels\": [1, 2, 3, 4]}";
 
+  @Test
+  public void testIfPostAuthorizationOK_thenReturnsStatusCreated() throws Exception {
+    String requestContent = Message.BADGE_FULL_BODY;
     mockMvc.perform(post("/api/badges")
         .contentType(MediaType.APPLICATION_JSON)
         .content(requestContent)
@@ -104,6 +104,41 @@ public class BadgesRestControllerTest {
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
         .andDo(print())
         .andExpect(status().isCreated());
+  }
+
+  @Test
+  public void testWhenPostStatusIsUnauthorized_thenReturnsStatusUnauthorized() throws Exception {
+    String requestContent = Message.BADGE_FULL_BODY;
+    mockMvc.perform(post("/api/badges")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(requestContent)
+        .characterEncoding("utf-8")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
+        .andExpect(status().isUnauthorized())
+        .andDo(print())
+        .andReturn();
+  }
+
+  @Test
+  public void testWhenPostStatusIsUnauthorized_thenReturnsUnauthorizedErrorBody() throws Exception {
+    String requestContent = Message.BADGE_FULL_BODY;
+    mockMvc.perform(post("/api/badges")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(requestContent)
+        .characterEncoding("utf-8")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
+        .andExpect(content().string(Message.UNAUTHORIZED_BODY))
+        .andDo(print())
+        .andReturn();
+  }
+
+  @Test
+  public void tesIfPostStatusIsAuthorized_thenSaveSuccessfully() {
+    when(badgeRepository.save(any(Badge.class))).thenReturn(badge);
+    badgeService.save(badge);
+
+    assertEquals("general", badge.getTag());
+    verify(badgeRepository, times(1)).save(badge);
   }
 
   @TestConfiguration

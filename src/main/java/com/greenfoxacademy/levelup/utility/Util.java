@@ -59,7 +59,7 @@ public class Util {
     return new ResponseEntity<>(Message.BADGE_SUCCESFUL_BODY, HttpStatus.OK);
   }
 
-  private static boolean hasNullField(Object object) throws IllegalAccessException {
+  public static boolean hasNullField(Object object) throws IllegalAccessException {
     for (Field field : object.getClass().getDeclaredFields()) {
       field.setAccessible(true);
       if (field.get(object) == null) {

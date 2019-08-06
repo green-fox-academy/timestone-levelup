@@ -2,7 +2,6 @@ package com.greenfoxacademy.levelup.controller;
 
 import com.greenfoxacademy.levelup.collection.Message;
 import com.greenfoxacademy.levelup.model.Badge;
-import com.greenfoxacademy.levelup.utility.Util;
 import com.greenfoxacademy.levelup.service.IBadgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,7 @@ public class BadgesRestController {
   }
 
   @PostMapping("/api/badges")
-  public ResponseEntity<String> postBadges(@RequestHeader(value = Message.HEADER_NAME, required = false) String authorization, @RequestBody Badge badge) throws Exception {
-    return Util.getAuthorizationAndStatusCreated(authorization, badge);
+  public ResponseEntity<String> postBadges(@RequestHeader(value = Message.HEADER_NAME, required = false) String authorization, @RequestBody Badge badge) {
+    return badgeService.getAuthorizationAndStatusCreated(authorization, badge);
   }
 }

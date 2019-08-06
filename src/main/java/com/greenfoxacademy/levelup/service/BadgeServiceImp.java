@@ -60,4 +60,14 @@ public class BadgeServiceImp implements IBadgeService{
     });
     return badgesJsonArray[0];
   }
+
+  @Override
+  public ResponseEntity<String> getAuthorizationAndStatusCreated(String authorization, Object object){
+    if (authorization == null || !authorization.equals(Message.AUTHORIZATION_OK)) {
+      return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
+          HttpStatus.UNAUTHORIZED);
+    }
+    return new ResponseEntity<>(Message.CREATED_BODY,
+        HttpStatus.CREATED);
+  }
 }
