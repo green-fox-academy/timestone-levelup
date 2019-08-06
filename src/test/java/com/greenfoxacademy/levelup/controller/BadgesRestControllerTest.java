@@ -84,7 +84,7 @@ public class BadgesRestControllerTest {
 
     mockMvc.perform(get("/api/badges")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
-        .andExpect(content().string(new Gson().toJson(badge) + "\n"))
+        .andExpect(content().string(new Gson().toJson(badge)))
         .andDo(print())
         .andReturn();
   }
