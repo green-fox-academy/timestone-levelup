@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head th:insert="levelUpTemplate :: shared-header">
+</head>
+<body>
+<div th:insert="levelUpTemplate :: navbar-group"></div>
+<h1>Create Badge</h1>
+<form>
+  <fieldset>
+    <legend>Create a badge</legend>
+    <div class="form-group">
+      <label class="col-form-label">Version</label>
+      <input type="text" class="form-control" placeholder="e.g. 1.1">
+    </div>
+    <div class="form-group">
+      <label class="col-form-label">Badge name</label>
+      <input type="text" class="form-control" placeholder="e.g. English speaker">
+    </div>
+    </div>
+    <div class="form-group">
+      <label class="col-form-label">Tag</label>
+      <input type="text" class="form-control" placeholder="e.g. mentor">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </fieldset>
+</form>
+<div th:insert="levelUpTemplate :: bottom-script"></div>
+</body>
+</html>
