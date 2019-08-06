@@ -4,11 +4,11 @@ import com.greenfoxacademy.levelup.collection.Message;
 import com.greenfoxacademy.levelup.model.User;
 import com.greenfoxacademy.levelup.repository.IUserRepository;
 import com.greenfoxacademy.levelup.utility.Util;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class UserServiceImp implements IUserService {
@@ -26,19 +26,19 @@ public class UserServiceImp implements IUserService {
 
   @Override
   public void delete(long id) {
-    personRepository.delete(personRepository.findById(id).get());
+    personRepository.delete(personRepository.findById(id).orElse(null));
   }
 
   @Override
   public List<User> findAll() {
     List<User> users = new ArrayList<>();
-    personRepository.findAll().forEach(person -> users.add(person));
+    personRepository.findAll().forEach(users::add);
     return users;
   }
 
   @Override
   public User findById(long id) {
-    return personRepository.findById(id).get();
+    return personRepository.findById(id).orElse(null);
   }
 
   @Override
