@@ -6,6 +6,7 @@ import com.greenfoxacademy.levelup.repository.IUserRepository;
 import com.greenfoxacademy.levelup.utility.Util;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,32 +14,29 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImp implements IUserService {
 
-  private final IUserRepository personRepository;
-
-  public UserServiceImp(IUserRepository personRepository) {
-    this.personRepository = personRepository;
-  }
+  @Autowired
+  private IUserRepository userRepository;
 
   @Override
   public void save(User user) {
-    personRepository.save(user);
+    userRepository.save(user);
   }
 
   @Override
   public void delete(long id) {
-    personRepository.delete(personRepository.findById(id).orElse(null));
+    userRepository.delete(userRepository.findById(id).orElse(null));
   }
 
   @Override
   public List<User> findAll() {
     List<User> users = new ArrayList<>();
-    personRepository.findAll().forEach(users::add);
+    userRepository.findAll().forEach(users::add);
     return users;
   }
 
   @Override
   public User findById(long id) {
-    return personRepository.findById(id).orElse(null);
+    return userRepository.findById(id).orElse(null);
   }
 
   @Override
