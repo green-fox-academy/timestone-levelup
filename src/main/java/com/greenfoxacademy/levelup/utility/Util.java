@@ -1,15 +1,14 @@
 package com.greenfoxacademy.levelup.utility;
 
+import com.google.gson.Gson;
 import com.greenfoxacademy.levelup.collection.Message;
 import com.greenfoxacademy.levelup.model.Badge;
-import com.greenfoxacademy.levelup.model.BadgeLevel;
+import com.greenfoxacademy.levelup.model.User;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.lang.reflect.Field;
 
 public class Util {
 
@@ -74,6 +73,22 @@ public class Util {
     }
     return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
         HttpStatus.UNAUTHORIZED);
+  }
+
+  public static String convertListOfUserToJson(List<User> models) {
+    String modelsJsonString = models.stream().map(model -> convertModelToJson(model)).collect(Collectors.joining("\n"));
+    return modelsJsonString;
+  }
+
+  public static String convertListOfBadgeToJson(List<Badge> models) {
+
+    String modelsJsonString = models.stream().map(model -> convertModelToJson(model)).collect(Collectors.joining("\n"));
+    return modelsJsonString;
+  }
+
+  public static String convertModelToJson(Object object) {
+    Gson gson = new Gson();
+    return gson.toJson(object);
   }
 }
 
