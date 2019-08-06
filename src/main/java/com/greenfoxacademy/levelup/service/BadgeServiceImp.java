@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BadgeServiceImp implements IBadgeService {
+
   @Autowired
   private IBadgeRepository badgeRepository;
 
@@ -39,6 +40,16 @@ public class BadgeServiceImp implements IBadgeService {
   }
 
   @Override
+  public ResponseEntity<String> getBadgeJsonById(long id, String authorization) {
+
+    if (authorization == null || !authorization.equals(Message.AUTHORIZATION_OK)) {
+      return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
+          HttpStatus.UNAUTHORIZED);
+    }
+    return new ResponseEntity<>(convertModel2Json(this.findById(id)),
+        HttpStatus.OK);
+  }
+
   public ResponseEntity<String> getBadgesJsonObjects(String authorization) {
     if (authorization == null || !authorization.equals(Message.AUTHORIZATION_OK)) {
       return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
@@ -48,13 +59,17 @@ public class BadgeServiceImp implements IBadgeService {
         HttpStatus.OK);
   }
 
-  @Override
-  public String badgesToJsons(List<Badge> badgeList) {
+  private String convertModel2Json(Object object) {
+    Gson gson = new Gson();
+    return gson.toJson(object);
+  }
+
+  private String badgesToJsons(List<Badge> badgeList) {
     String[] badgesJsonArray = new String[]{""};
     badgeList.forEach(badge -> {
       Gson gson = new Gson();
       String badgeJson = gson.toJson(badge);
-      badgesJsonArray[0] =  badgesJsonArray[0].concat(badgeJson + "\n");
+      badgesJsonArray[0] = badgesJsonArray[0].concat(badgeJson + "\n");
     });
     return badgesJsonArray[0];
   }

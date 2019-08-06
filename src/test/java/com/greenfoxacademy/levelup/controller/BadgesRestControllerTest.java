@@ -11,7 +11,6 @@ import com.greenfoxacademy.levelup.collection.Message;
 import com.greenfoxacademy.levelup.model.Badge;
 import com.greenfoxacademy.levelup.repository.IBadgeRepository;
 import com.greenfoxacademy.levelup.service.BadgeServiceImp;
-import com.greenfoxacademy.levelup.service.IBadgeService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
@@ -52,12 +51,31 @@ public class BadgesRestControllerTest {
   }
 
   @Test
+  public void testIfAuthorizationOKAtBadgeId_thenReturnsStatusOk() throws Exception {
+    mockMvc.perform(get("/api/badge/1")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
+        .andExpect(status().isOk())
+        .andDo(print())
+        .andReturn();
+  }
+
+  @Test
   public void testIfAuthorizationOK_thenReturnsStatusOk() throws Exception {
     mockMvc.perform(get("/api/badges")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
         .andExpect(status().isOk())
         .andDo(print())
         .andReturn();
+  }
+
+
+  @Test
+  public void testIfAuthorizationOK_thenReturnsBadgesJsonObjectById() throws Exception {
+    when(badgeRepository.findById(1L)).thenReturn(java.util.Optional.ofNullable(badge));
+
+    mockMvc.perform(get("/api/badge/1")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
+        .andExpect(content().string(new Gson().toJson(badge)));
   }
 
   @Test
@@ -81,8 +99,28 @@ public class BadgesRestControllerTest {
   }
 
   @Test
-  public void testWhenStatusIsUnauthorized_thenReturnsUnauthorizedErrorBodyd() throws Exception {
+  public void testWhenStatusIsUnauthorized_thenReturnsUnauthorizedErrorBody() throws Exception {
     mockMvc.perform(get("/api/badges")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
+        .andExpect(content().string(Message.UNAUTHORIZED_BODY))
+        .andDo(print())
+        .andReturn();
+  }
+
+  @Test
+  public void testWhenStatusIsUnauthorizedAtBadgeId_thenReturnsStatusUnauthorized()
+      throws Exception {
+    mockMvc.perform(get("/api/badge/1")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
+        .andExpect(status().isUnauthorized())
+        .andDo(print())
+        .andReturn();
+  }
+
+  @Test
+  public void testWhenStatusIsUnauthorizedAtBadgeId_thenReturnsUnauthorizedErrorBody()
+      throws Exception {
+    mockMvc.perform(get("/api/badge/1")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
         .andExpect(content().string(Message.UNAUTHORIZED_BODY))
         .andDo(print())
@@ -93,7 +131,7 @@ public class BadgesRestControllerTest {
   static class BadgeServiceImpTestContextConfiguration {
 
     @Bean
-    public IBadgeService badgeService() {
+    public BadgeServiceImp badgeService() {
       return new BadgeServiceImp();
     }
   }
