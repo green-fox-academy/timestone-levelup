@@ -26,3 +26,4 @@ public class Pitch {
   @ManyToOne
   private User user;
 }
+

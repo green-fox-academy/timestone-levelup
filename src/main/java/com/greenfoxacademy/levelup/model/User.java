@@ -1,18 +1,17 @@
 package com.greenfoxacademy.levelup.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Entity
 public class User {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
