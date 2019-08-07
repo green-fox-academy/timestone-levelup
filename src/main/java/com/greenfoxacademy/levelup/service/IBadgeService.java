@@ -9,7 +9,7 @@ public interface IBadgeService {
   void delete(long id);
   List<Badge> findAll();
   Badge findById(long id);
-  String badgesToJsons(List<Badge> badgeList);
+  ResponseEntity<String> getBadgeJsonById(long id, String authorization);
   ResponseEntity<String> getBadgesJsonObjects(String authorization);
   ResponseEntity<String> getAuthorizationAndStatusCreated(String authorization, Object object);
 }

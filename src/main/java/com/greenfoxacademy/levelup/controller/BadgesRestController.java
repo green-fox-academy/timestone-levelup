@@ -5,11 +5,17 @@ import com.greenfoxacademy.levelup.model.Badge;
 import com.greenfoxacademy.levelup.service.IBadgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.*;
+=======
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> 5ddbf13b2860a51a53db39082e812a00d3da077e
 
 @RestController
 public class BadgesRestController {
-
   @Autowired
   private IBadgeService badgeService;
 
@@ -19,8 +25,15 @@ public class BadgesRestController {
     return badgeService.getBadgesJsonObjects(authorization);
   }
 
+<<<<<<< HEAD
   @PostMapping("/api/badges")
   public ResponseEntity<String> postBadges(@RequestHeader(value = Message.HEADER_NAME, required = false) String authorization, @RequestBody Badge badge) {
     return badgeService.getAuthorizationAndStatusCreated(authorization, badge);
+=======
+  @GetMapping("/api/badge/{badgeid}")
+  public ResponseEntity<String> getBadgeJsonById(@PathVariable(name = "badgeid") long badgeId,
+      @RequestHeader(value = Message.HEADER_NAME, required = false) String authorization) {
+    return badgeService.getBadgeJsonById(badgeId, authorization);
+>>>>>>> 5ddbf13b2860a51a53db39082e812a00d3da077e
   }
 }

@@ -22,18 +22,18 @@ public class BadgeLevelServiceImp implements IBadgeLevelService {
 
   @Override
   public void delete(long id) {
-    badgeLevelRepository.delete(badgeLevelRepository.findById(id).get());
+    badgeLevelRepository.delete(badgeLevelRepository.findById(id).orElse(null));
   }
 
   @Override
   public List<BadgeLevel> findAll() {
     List<BadgeLevel> badgeLevels = new ArrayList<>();
-    badgeLevelRepository.findAll().forEach(badgeLevel -> badgeLevels.add(badgeLevel));
+    badgeLevelRepository.findAll().forEach(badgeLevels::add);
     return badgeLevels;
   }
 
   @Override
   public BadgeLevel findById(long id) {
-    return badgeLevelRepository.findById(id).get();
+    return badgeLevelRepository.findById(id).orElse(null);
   }
 }
