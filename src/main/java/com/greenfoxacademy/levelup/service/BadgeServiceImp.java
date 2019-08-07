@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+
 @NoArgsConstructor
 @Service
 public class BadgeServiceImp implements IBadgeService {
@@ -59,5 +60,16 @@ public class BadgeServiceImp implements IBadgeService {
     }
     return new ResponseEntity<>(Util.convertListOfBadgeToJson(findAll()),
         HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<String> getAuthorizationAndStatusCreated(String authorization,
+      Object object) {
+    if (authorization == null || !authorization.equals(Message.AUTHORIZATION_OK)) {
+      return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
+          HttpStatus.UNAUTHORIZED);
+    }
+    return new ResponseEntity<>(Message.CREATED_BODY,
+        HttpStatus.CREATED);
   }
 }
