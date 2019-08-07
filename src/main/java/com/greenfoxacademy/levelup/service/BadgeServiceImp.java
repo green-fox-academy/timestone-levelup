@@ -3,16 +3,24 @@ package com.greenfoxacademy.levelup.service;
 import com.greenfoxacademy.levelup.collection.Message;
 import com.greenfoxacademy.levelup.model.Badge;
 import com.greenfoxacademy.levelup.repository.IBadgeRepository;
+<<<<<<< HEAD
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+=======
 import com.greenfoxacademy.levelup.utility.Util;
+>>>>>>> 5ddbf13b2860a51a53db39082e812a00d3da077e
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+
 
 @Service
+<<<<<<< HEAD
+public class BadgeServiceImp implements IBadgeService{
+=======
 public class BadgeServiceImp implements IBadgeService {
+>>>>>>> 5ddbf13b2860a51a53db39082e812a00d3da077e
 
   @Autowired
   private IBadgeRepository badgeRepository;
@@ -57,5 +65,15 @@ public class BadgeServiceImp implements IBadgeService {
     }
     return new ResponseEntity<>(Util.convertListOfBadgeToJson(findAll()),
         HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<String> getAuthorizationAndStatusCreated(String authorization, Object object){
+    if (authorization == null || !authorization.equals(Message.AUTHORIZATION_OK)) {
+      return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
+          HttpStatus.UNAUTHORIZED);
+    }
+    return new ResponseEntity<>(Message.CREATED_BODY,
+        HttpStatus.CREATED);
   }
 }

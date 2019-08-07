@@ -2,13 +2,13 @@ package com.greenfoxacademy.levelup.utility;
 
 import com.google.gson.Gson;
 import com.greenfoxacademy.levelup.collection.Message;
-import com.greenfoxacademy.levelup.model.Badge;
-import com.greenfoxacademy.levelup.model.User;
 import java.lang.reflect.Field;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import com.greenfoxacademy.levelup.model.Badge;
+import com.greenfoxacademy.levelup.model.User;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Util {
 
@@ -56,7 +56,14 @@ public class Util {
         HttpStatus.UNAUTHORIZED);
   }
 
-  private static boolean hasNullField(Object object) throws IllegalAccessException {
+  public static ResponseEntity<String> getBadgesAuthorizationAndStatus(String authorization) {
+    if (authorization == null || !authorization.equals(Message.AUTHORIZATION_OK)) {
+      return new ResponseEntity<>(Message.UNAUTHORIZED_BODY, HttpStatus.UNAUTHORIZED);
+    }
+    return new ResponseEntity<>(Message.BADGE_SUCCESFUL_BODY, HttpStatus.OK);
+  }
+
+  public static boolean hasNullField(Object object) throws IllegalAccessException {
     for (Field field : object.getClass().getDeclaredFields()) {
       field.setAccessible(true);
       if (field.get(object) == null) {
