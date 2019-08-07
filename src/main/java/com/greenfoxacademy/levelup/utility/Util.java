@@ -1,13 +1,7 @@
 package com.greenfoxacademy.levelup.utility;
 
 import com.greenfoxacademy.levelup.collection.Message;
-
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.greenfoxacademy.levelup.model.Badge;
-import com.greenfoxacademy.levelup.model.BadgeLevel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -83,3 +77,4 @@ public class Util {
         HttpStatus.UNAUTHORIZED);
   }
 }
+
