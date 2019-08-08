@@ -71,8 +71,7 @@ public class Util {
         HttpStatus.UNAUTHORIZED);
   }
 
-  public static ResponseEntity<String> putBadgeAuthorizationIsOk(String authorization,
-                                                                 Object object)
+  public static ResponseEntity<String> putBadgeAuthorizationIsOk(String authorization)
           throws Exception {
 
     if (!authorization.equals(Message.AUTHORIZATION_OK)) {

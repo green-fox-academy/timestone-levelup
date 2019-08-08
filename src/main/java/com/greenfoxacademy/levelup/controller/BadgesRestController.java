@@ -29,7 +29,7 @@ public class BadgesRestController {
   public ResponseEntity<String> putBadgeById(@PathVariable("badgeid") long id,
       @RequestHeader(value = Message.HEADER_NAME) String authorization,
       @RequestBody Badge badge) throws Exception {
-    badge = badgeService.findById(id);
-    return Util.putBadgeAuthorizationIsOk(authorization, badge);
+      badgeService.save(badge);
+    return Util.putBadgeAuthorizationIsOk(authorization);
   }
 }
