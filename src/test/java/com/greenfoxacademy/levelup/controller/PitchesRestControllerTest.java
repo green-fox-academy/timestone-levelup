@@ -31,8 +31,8 @@ import org.springframework.test.web.servlet.ResultActions;
 @WebMvcTest(controllers = PitchesRestController.class, secure = false)
 public class PitchesRestControllerTest {
 
-  Pitch pitch = new Pitch();
-  List<Pitch> pitchList = new ArrayList<>();
+  Pitch pitch;
+  List<Pitch> pitchList;
 
   @Autowired
   MockMvc mockMvc;
