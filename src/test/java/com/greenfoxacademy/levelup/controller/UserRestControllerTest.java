@@ -59,13 +59,31 @@ public class UserRestControllerTest {
   }
 
   @Test
-  public void testIfAuthorizationIsOK_thenReturnUserById() throws Exception {
+  public void testIfAuthorizationIsOK_thenReturnsUserById() throws Exception {
     when(userRepository.findById(1L)).thenReturn(java.util.Optional.ofNullable((userOne)));
 
     mockMvc.perform(get("/api/users/1")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
         .andExpect(
             content().string(new Gson().toJson(userOne)))
+        .andDo(print())
+        .andReturn();
+  }
+
+  @Test
+  public void testIfStatusUnauthorizedOnUserById_thenReturnsStatusUnauthorized() throws Exception {
+    mockMvc.perform(get("/api/users/1")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
+        .andExpect(status().isUnauthorized())
+        .andDo(print())
+        .andReturn();
+  }
+
+  @Test
+  public void testIfStatusUnauthorizedOnUserById_thenReturnsUnauthorizedErrorBody() throws Exception {
+    mockMvc.perform(get("/api/users/1")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
+        .andExpect(content().string(Message.UNAUTHORIZED_BODY))
         .andDo(print())
         .andReturn();
   }
@@ -92,7 +110,7 @@ public class UserRestControllerTest {
   }
 
   @Test
-  public void testWhenStatusIsUnauthorized_thenReturnsStatusUnauthorized() throws Exception {
+  public void testIfStatusIsUnauthorized_thenReturnsStatusUnauthorized() throws Exception {
     mockMvc.perform(get("/api/users")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
         .andExpect(status().isUnauthorized())
@@ -101,7 +119,7 @@ public class UserRestControllerTest {
   }
 
   @Test
-  public void testWhenStatusIsUnauthorized_thenReturnsUnauthorizedErrorBody() throws Exception {
+  public void testIfStatusIsUnauthorized_thenReturnsUnauthorizedErrorBody() throws Exception {
     mockMvc.perform(get("/api/users")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_DENIED))
         .andExpect(content().string(Message.UNAUTHORIZED_BODY))
