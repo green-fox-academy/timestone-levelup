@@ -2,6 +2,7 @@ package com.greenfoxacademy.levelup.utility;
 
 import com.google.gson.Gson;
 import com.greenfoxacademy.levelup.collection.Message;
+import com.greenfoxacademy.levelup.model.Pitch;
 import java.lang.reflect.Field;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -99,6 +100,11 @@ public class Util {
   }
 
   public static String convertListOfBadgeToJson(List<Badge> models) {
+    String modelsJsonString = models.stream().map(model -> convertModelToJson(model)).collect(Collectors.joining("\n"));
+    return modelsJsonString;
+  }
+
+  public static String convertListOfPitchToJson(List<Pitch> models) {
     String modelsJsonString = models.stream().map(model -> convertModelToJson(model)).collect(Collectors.joining("\n"));
     return modelsJsonString;
   }
