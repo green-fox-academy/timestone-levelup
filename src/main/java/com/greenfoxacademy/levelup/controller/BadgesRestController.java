@@ -7,6 +7,10 @@ import com.greenfoxacademy.levelup.utility.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BadgesRestController {
@@ -17,6 +21,11 @@ public class BadgesRestController {
   public ResponseEntity<String> showBadges(
       @RequestHeader(value = Message.HEADER_NAME, required = false) String authorization) {
     return badgeService.getBadgesJsonObjects(authorization);
+  }
+
+  @PostMapping("/api/badges")
+  public ResponseEntity<String> postBadges(@RequestHeader(value = Message.HEADER_NAME, required = false) String authorization, @RequestBody Badge badge) {
+    return badgeService.getAuthorizationAndStatusCreated(authorization, badge);
   }
 
   @GetMapping("/api/badge/{badgeid}")

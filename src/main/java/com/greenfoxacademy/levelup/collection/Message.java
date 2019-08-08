@@ -15,4 +15,14 @@ public class Message {
   public static final String ADDADMIN_BODY = "{\"version\": \"2.3\",\"name\": \"Badge inserter\",\"tag\": \"general\",\"levels\": [1, 2, 3, 4]}";
   public static final String BADGE_SUCCESFUL_BODY = "{\"name\": \"Process improver\",\"level\": \"1\",\"name\": English speaker\"level\": \"1\", \"name\": \"Feedback giver\",\"level\": \"1\",}";
   public static final String UPDATED_STATUS = "{\"message\": \"Updated\"}";
+  public static final String BADGE_FULL_BODY = "{\"version\":\"2.3\",\n" +
+      "   \"name\":\"Process improver/initator\",\n" +
+      "   \"tag\":\"general\",\n" +
+      "   \"levels\":[  \n" +
+      "      {  \n" +
+      "         \"level\":1,\n" +
+      "         \"weight\":2,\n" +
+      "         \"description\":\"I can see through processes and propose relevant and doable ideas for improvement. I can create improved definition / accountibility / documentation and communicate it to the team\"\n" +
+      "      }\n" +
+      "   ]}";
 }
