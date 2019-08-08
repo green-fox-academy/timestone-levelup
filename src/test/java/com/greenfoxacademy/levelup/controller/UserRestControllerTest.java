@@ -50,6 +50,27 @@ public class UserRestControllerTest {
   }
 
   @Test
+  public void testIfAuthorizationIsOKOnUserById_thenReturnsStatusOk() throws Exception {
+    mockMvc.perform(get("/api/users/1")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
+        .andExpect(status().isOk())
+        .andDo(print())
+        .andReturn();
+  }
+
+  @Test
+  public void testIfAuthorizationIsOK_thenReturnUserById() throws Exception {
+    when(userRepository.findById(1L)).thenReturn(java.util.Optional.ofNullable((userOne)));
+
+    mockMvc.perform(get("/api/users/1")
+        .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
+        .andExpect(
+            content().string(new Gson().toJson(userOne)))
+        .andDo(print())
+        .andReturn();
+  }
+
+  @Test
   public void testIfAuthorizationOK_thenReturnsStatusOk() throws Exception {
     mockMvc.perform(get("/api/users")
         .header(Message.HEADER_NAME, Message.AUTHORIZATION_OK))
