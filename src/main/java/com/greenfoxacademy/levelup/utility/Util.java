@@ -2,11 +2,12 @@ package com.greenfoxacademy.levelup.utility;
 
 import com.google.gson.Gson;
 import com.greenfoxacademy.levelup.collection.Message;
-import java.lang.reflect.Field;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import com.greenfoxacademy.levelup.model.Badge;
 import com.greenfoxacademy.levelup.model.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,8 +83,7 @@ public class Util {
         HttpStatus.UNAUTHORIZED);
   }
 
-  public static ResponseEntity<String> putBadgeAuthorizationIsOk(String authorization)
-          throws Exception {
+  public static ResponseEntity<String> putBadgeAuthorizationIsOk(String authorization) {
 
     if (!authorization.equals(Message.AUTHORIZATION_OK)) {
       return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
@@ -106,7 +106,5 @@ public class Util {
   public static String convertModelToJson(Object object) {
     Gson gson = new Gson();
     return gson.toJson(object);
-
   }
 }
-
