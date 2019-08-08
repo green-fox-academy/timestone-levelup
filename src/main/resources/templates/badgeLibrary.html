@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:insert="levelUpTemplate :: shared-header">
 </head>
 <body>
@@ -21,6 +21,7 @@
     <td th:text="${badge.getTag()}"></td>
     <td th:text="${badge.getBadgeLevels()}"></td>
   </tr>
+  <div sec:authorize="isAuthenticated()">Authenticated as <span sec:authentication="name"></span></div>
   </tbody>
 </table>
 <div th:insert="levelUpTemplate :: bottom-script"></div>

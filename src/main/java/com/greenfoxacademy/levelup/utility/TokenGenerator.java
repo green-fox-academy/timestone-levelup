@@ -14,7 +14,7 @@ import java.util.Date;
 public class TokenGenerator {
 
   public static String createJWT() {
-    String secretKey = System.getenv("SECRET_KEY");
+    String secretKey = "hgsjzvt46st64fbvzthsgh4zftshgwdte45435";//System.getenv("SECRET_KEY");
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     String currentPrincipalName = authentication.getName();
     SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;

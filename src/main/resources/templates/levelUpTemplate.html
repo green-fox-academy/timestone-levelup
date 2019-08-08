@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:fragment="shared-header">
     <title>LevelUp Application</title> 
   <meta charset="utf-8">
@@ -18,10 +18,10 @@
     <ul class="navbar-nav mr-auto">
       <li class="dropdown">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          User Profile</a>
+          <span th:text =“${#authentication.getPrincipal()}“></span>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">My Pitches</a>
-          <a class="dropdown-item" href="#">My Reviews</a>
+          <a class="dropdown-item" th:href="@{/pitches}">My Pitches</a>
+          <a class="dropdown-item" th:href="@{/reviews}">My Reviews</a>
           <a class="dropdown-item" href="#">Logout</a>
         </div>
       </li>
