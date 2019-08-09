@@ -21,7 +21,6 @@
     <td th:text="${badge.getTag()}"></td>
     <td th:text="${badge.getBadgeLevels()}"></td>
   </tr>
-  <div sec:authorize="isAuthenticated()">Authenticated as <span sec:authentication="name"></span></div>
   </tbody>
 </table>
 <div th:insert="levelUpTemplate :: bottom-script"></div>

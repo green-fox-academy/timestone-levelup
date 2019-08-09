@@ -17,26 +17,25 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span th:text =“${#authentication.getPrincipal()}“></span>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" th:href="@{/pitches}">My Pitches</a>
-          <a class="dropdown-item" th:href="@{/reviews}">My Reviews</a>
-          <a class="dropdown-item" href="#">Logout</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href= "@{/badgelibrary}">Badge Library</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href= "@{/pitches}">Pitches</a>
-      </li>
-    </ul>
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><div sec:authorize="isAuthenticated()"><span sec:authentication="userAuthentication.details['name']"></span></div>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" th:href="@{/pitches}">My Pitches</a>
+            <a class="dropdown-item" th:href="@{/reviews}">My Reviews</a>
+            <a class="dropdown-item" href="#">Logout</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href= "@{/badgelibrary}">Badge Library</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href= "@{/pitches}">Pitches</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div th:fragment="bottom-script">
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
   </div>
-</nav>
-<div th:fragment="bottom-script">
-  <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
-  <script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
-</div>
-</body>
-</html>
+  </body>
+  </html>
