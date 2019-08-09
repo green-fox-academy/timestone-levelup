@@ -54,6 +54,4 @@ public class UserServiceImp implements IUserService {
     }
     return new ResponseEntity<>(Util.convertModelToJson(findById(id)), HttpStatus.OK);
   }
-
-
 }
