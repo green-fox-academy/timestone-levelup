@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SlackNotificationServiceImp implements ISlackNotificationService {
 
-  @Value("https://hooks.slack.com/services/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")
+  @Value("${WEBHOOK_URL}")
   private String slackWebhookUrl;
   private ISlackNotificationService slackNotificationService;
 
