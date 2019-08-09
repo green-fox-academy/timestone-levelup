@@ -2,6 +2,7 @@ package com.greenfoxacademy.levelup.utility;
 
 import com.google.gson.Gson;
 import com.greenfoxacademy.levelup.collection.Message;
+import com.greenfoxacademy.levelup.model.Pitch;
 import java.lang.reflect.Field;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -82,6 +83,17 @@ public class Util {
         HttpStatus.UNAUTHORIZED);
   }
 
+  public static ResponseEntity<String> putBadgeAuthorizationIsOk(String authorization)
+          throws Exception {
+
+    if (!authorization.equals(Message.AUTHORIZATION_OK)) {
+      return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
+              HttpStatus.UNAUTHORIZED);
+    }
+    return new ResponseEntity<>(Message.UPDATED_STATUS,
+            HttpStatus.OK);
+  }
+
   public static String convertListOfUserToJson(List<User> models) {
     String modelsJsonString = models.stream().map(model -> convertModelToJson(model)).collect(Collectors.joining("\n"));
     return modelsJsonString;
@@ -92,9 +104,15 @@ public class Util {
     return modelsJsonString;
   }
 
+  public static String convertListOfPitchToJson(List<Pitch> models) {
+    String modelsJsonString = models.stream().map(model -> convertModelToJson(model)).collect(Collectors.joining("\n"));
+    return modelsJsonString;
+  }
+
   public static String convertModelToJson(Object object) {
     Gson gson = new Gson();
     return gson.toJson(object);
+
   }
 }
 
