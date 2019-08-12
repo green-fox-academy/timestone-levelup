@@ -2,6 +2,7 @@ package com.greenfoxacademy.levelup.utility;
 
 import com.google.gson.Gson;
 import com.greenfoxacademy.levelup.collection.Message;
+import java.lang.reflect.Field;
 import com.greenfoxacademy.levelup.model.Pitch;
 import java.lang.reflect.Field;
 import org.springframework.http.HttpStatus;

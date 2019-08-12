@@ -3,6 +3,8 @@ package com.greenfoxacademy.levelup.controller;
 import com.greenfoxacademy.levelup.collection.Message;
 import com.greenfoxacademy.levelup.model.Badge;
 import com.greenfoxacademy.levelup.service.IBadgeService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.greenfoxacademy.levelup.utility.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BadgesRestController {
+
   @Autowired
   private IBadgeService badgeService;
 
