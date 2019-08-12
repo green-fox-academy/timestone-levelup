@@ -6,11 +6,15 @@ import com.greenfoxacademy.levelup.repository.IBadgeRepository;
 import com.greenfoxacademy.levelup.utility.Util;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
 
+@NoArgsConstructor
 @Service
 public class BadgeServiceImp implements IBadgeService {
 
@@ -57,5 +61,16 @@ public class BadgeServiceImp implements IBadgeService {
     }
     return new ResponseEntity<>(Util.convertListOfBadgeToJson(findAll()),
         HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<String> getAuthorizationAndStatusCreated(String authorization,
+      Object object) {
+    if (authorization == null || !authorization.equals(Message.AUTHORIZATION_OK)) {
+      return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
+          HttpStatus.UNAUTHORIZED);
+    }
+    return new ResponseEntity<>(Message.CREATED_BODY,
+        HttpStatus.CREATED);
   }
 }

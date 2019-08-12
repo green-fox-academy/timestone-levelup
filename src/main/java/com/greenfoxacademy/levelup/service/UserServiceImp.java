@@ -46,4 +46,12 @@ public class UserServiceImp implements IUserService {
     }
     return new ResponseEntity<>(Util.convertListOfUserToJson(findAll()), HttpStatus.OK);
   }
+
+  @Override
+  public ResponseEntity<String> getUserById(long id, String authorization) {
+    if (authorization == null || !authorization.equals(Message.AUTHORIZATION_OK)) {
+      return new ResponseEntity<>(Message.UNAUTHORIZED_BODY, HttpStatus.UNAUTHORIZED);
+    }
+    return new ResponseEntity<>(Util.convertModelToJson(findById(id)), HttpStatus.OK);
+  }
 }

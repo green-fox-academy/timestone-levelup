@@ -3,12 +3,14 @@ package com.greenfoxacademy.levelup.utility;
 import com.google.gson.Gson;
 import com.greenfoxacademy.levelup.collection.Message;
 import java.lang.reflect.Field;
+import com.greenfoxacademy.levelup.model.Pitch;
+import java.lang.reflect.Field;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import com.greenfoxacademy.levelup.model.Badge;
 import com.greenfoxacademy.levelup.model.User;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 public class Util {
 
@@ -63,7 +65,7 @@ public class Util {
     return new ResponseEntity<>(Message.BADGE_SUCCESFUL_BODY, HttpStatus.OK);
   }
 
-  private static boolean hasNullField(Object object) throws IllegalAccessException {
+  public static boolean hasNullField(Object object) throws IllegalAccessException {
     for (Field field : object.getClass().getDeclaredFields()) {
       field.setAccessible(true);
       if (field.get(object) == null) {
@@ -82,6 +84,17 @@ public class Util {
         HttpStatus.UNAUTHORIZED);
   }
 
+  public static ResponseEntity<String> putBadgeAuthorizationIsOk(String authorization)
+          throws Exception {
+
+    if (!authorization.equals(Message.AUTHORIZATION_OK)) {
+      return new ResponseEntity<>(Message.UNAUTHORIZED_BODY,
+              HttpStatus.UNAUTHORIZED);
+    }
+    return new ResponseEntity<>(Message.UPDATED_STATUS,
+            HttpStatus.OK);
+  }
+
   public static String convertListOfUserToJson(List<User> models) {
     String modelsJsonString = models.stream().map(model -> convertModelToJson(model)).collect(Collectors.joining("\n"));
     return modelsJsonString;
@@ -92,9 +105,15 @@ public class Util {
     return modelsJsonString;
   }
 
+  public static String convertListOfPitchToJson(List<Pitch> models) {
+    String modelsJsonString = models.stream().map(model -> convertModelToJson(model)).collect(Collectors.joining("\n"));
+    return modelsJsonString;
+  }
+
   public static String convertModelToJson(Object object) {
     Gson gson = new Gson();
     return gson.toJson(object);
+
   }
 }
 

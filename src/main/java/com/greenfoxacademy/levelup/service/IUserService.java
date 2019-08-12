@@ -11,4 +11,5 @@ public interface IUserService {
   List<User> findAll();
   User findById(long id);
   ResponseEntity<String> getUserJsonObjects(String authorization);
+  ResponseEntity<String> getUserById(long id, String authorization);
 }
