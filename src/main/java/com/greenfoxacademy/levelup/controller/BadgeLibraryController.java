@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
 @Controller
 public class BadgeLibraryController {
 
@@ -16,5 +17,10 @@ public class BadgeLibraryController {
   public String renderAllBadges(Model model) {
     model.addAttribute("badges", badgeService.findAll());
     return "badgeLibrary";
+  }
+
+  @GetMapping("/badgelibrary/create")
+  public String renderCreateForm() {
+    return "createBadge";
   }
 }
